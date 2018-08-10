@@ -1,4 +1,4 @@
-# ProjetoFarmacia
+# Projeto Farmacia
 Projeto Farmácia para a disciplina de PSD
 
 #Download Spring Tool Suite™
