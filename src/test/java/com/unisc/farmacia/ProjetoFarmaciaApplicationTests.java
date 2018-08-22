@@ -1,4 +1,4 @@
-package com.unisc.ProjetoFarmacia;
+package com.unisc.farmacia;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
