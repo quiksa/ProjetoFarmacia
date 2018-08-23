@@ -2,7 +2,6 @@ package com.unisc.farmacia;
 
 import javax.sql.DataSource;
 
-import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -28,7 +27,7 @@ public class DataConfiguration {
 		HibernateJpaVendorAdapter adptr = new HibernateJpaVendorAdapter();
 		adptr.setDatabase(Database.MYSQL);
 		adptr.setShowSql(true);
-		adptr.setGenerateDdl(false);
+		adptr.setGenerateDdl(true);
 		adptr.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
 		adptr.setPrepareConnection(true);
 		return adptr;

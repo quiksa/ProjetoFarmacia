@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "cargo")
 public class Cargo {
 
-	@Id@GeneratedValue
-	@Column(name="idCargo")
+	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column(name="idcargo")
 	private int idCargo;
 	
-	@Column (name="dsCargo")
+	@Column (name="dscargo")
 	private String dsCargo;
 	
 	public int getIdCargo() {
@@ -25,7 +25,4 @@ public class Cargo {
 	public void setDsCargo(String dsCargo) {
 		this.dsCargo = dsCargo;
 	}
-	
-	
-	
 }
