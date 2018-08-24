@@ -1,8 +1,11 @@
 package com.unisc.farmacia.model;
 
+
 public class Estoque {
 
+
 	private int idEstoque;
+	
 	private Unidade unidade;
 	public int getIdEstoque() {
 		return idEstoque;
