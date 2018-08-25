@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "estado")
 public class Estado {
@@ -25,6 +28,10 @@ public class Estado {
 	
 	@Column (name="uf")
 	private String uf;
+	
+	@OneToMany(mappedBy="estado",orphanRemoval = true)//mapear o atributo da classe cidade que faz referencia a Estado
+	@Cascade(CascadeType.ALL)
+	private List<Cidade>cidade = new ArrayList<Cidade>();
 		
 	public int getIdEstado() {
 		return idEstado;
