@@ -9,38 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unisc.farmacia.model.Cargo;
-import com.unisc.farmacia.repository.CargoRepository;
+import com.unisc.farmacia.model.Endereco;
+import com.unisc.farmacia.repository.EnderecoRepository;
 
 @RestController
-@RequestMapping("/cargo")
-public class CargoResources {
+@RequestMapping("/endereco")
+public class EnderecoResources {
 
 	@Autowired
-	private CargoRepository cr;
+	private EnderecoRepository er;
 	
 	@GetMapping(produces="application/json")
-	public @ResponseBody Iterable<Cargo> listaCargos() {
-		Iterable<Cargo> listaCargos = cr.findAll();
-		
-		return listaCargos;
+	public @ResponseBody Iterable<Endereco> listaEnderecos() {
+		Iterable<Endereco> listaEnderecos = er.findAll();
+		return listaEnderecos;
 	}
-	/*
-	public @ResponseBody Optional<Cargo> exibeCargo(int id){
-		Optional<Cargo> cargo = cr.findById(id);
-		return cargo;
-	}
-	*/
 	
 	@PostMapping()
-	public Cargo insereCargo(@RequestBody Cargo cargo) {
-		return cr.save(cargo);
+	public Endereco insereEndereco(@RequestBody Endereco Endereco) {
+		return er.save(Endereco);
 	}
 	
 	@DeleteMapping
-	public Cargo deletaCargo(@RequestBody Cargo cargo) {
-		cr.delete(cargo);
-		return cargo;
+	public Endereco deletaEndereco(@RequestBody Endereco Endereco) {
+		er.delete(Endereco);
+		return Endereco;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package com.unisc.farmacia.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -8,10 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Embeddable
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name="cidade")
 public class Cidade {
@@ -29,6 +34,11 @@ public class Cidade {
 	@ManyToOne
 	@JoinColumn(name="idestado")
 	private Estado estado;
+	
+	@OneToMany(mappedBy="cidade",orphanRemoval = true)//mapear o atributo da classe cidade que faz referencia a Estado
+	@Cascade(CascadeType.ALL)
+	private List<Endereco> endereco = new ArrayList<Endereco>();
+	
 	
 	public int getIdCidade() {
 		return idCidade;

@@ -1,7 +1,14 @@
 package com.unisc.farmacia.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="funcionario")
 public class Funcionario {
 
+	@Id
 	private int idFuncionario;
 	private Pessoa pessoa;
 	private String login;

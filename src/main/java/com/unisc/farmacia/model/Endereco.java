@@ -1,12 +1,33 @@
 package com.unisc.farmacia.model;
 
-public class Endereco {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="endereco")
+public class Endereco {
+	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column(name="idendereco")
 	private int idEndereco;
+	@Column (name="nmrua")
 	private String nmRua;
+	@Column (name="dscomplemento")
 	private String dsComplemento;
+	@Column (name="bairro")
 	private String bairro;
+	
+	@ManyToOne
+	@JoinColumn(name="idcidade")
 	private Cidade cidade;
+	
 	public int getIdEndereco() {
 		return idEndereco;
 	}

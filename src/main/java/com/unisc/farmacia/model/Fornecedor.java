@@ -2,9 +2,11 @@ package com.unisc.farmacia.model;
 
 public class Fornecedor {
 
+	
 	private int idFornecedor;
 	private String cnpj;
 	private String dsComplemento;
+
 	private Endereco endereco;
 	public int getIdFornecedor() {
 		return idFornecedor;
