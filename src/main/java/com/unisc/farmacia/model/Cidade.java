@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +15,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="cidade")
@@ -33,10 +35,12 @@ public class Cidade {
 	
 	@ManyToOne
 	@JoinColumn(name="idestado")
+	@JsonBackReference
 	private Estado estado;
 	
 	@OneToMany(mappedBy="cidade",orphanRemoval = true)//mapear o atributo da classe cidade que faz referencia a Estado
 	@Cascade(CascadeType.ALL)
+	@JsonManagedReference
 	private List<Endereco> endereco = new ArrayList<Endereco>();
 	
 	

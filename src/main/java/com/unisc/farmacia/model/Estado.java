@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "estado")
 public class Estado {
@@ -30,6 +32,7 @@ public class Estado {
 	
 	@OneToMany(mappedBy="estado",orphanRemoval = true)//mapear o atributo da classe cidade que faz referencia a Estado
 	@Cascade(CascadeType.ALL)
+	@JsonManagedReference
 	private List<Cidade>cidade = new ArrayList<Cidade>();
 		
 	public int getIdEstado() {

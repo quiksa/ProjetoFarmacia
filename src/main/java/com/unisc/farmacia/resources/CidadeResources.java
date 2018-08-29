@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unisc.farmacia.model.Cargo;
+
 import com.unisc.farmacia.model.Cidade;
 import com.unisc.farmacia.repository.CidadeRepository;
 

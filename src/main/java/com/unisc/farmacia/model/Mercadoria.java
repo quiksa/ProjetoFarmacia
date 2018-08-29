@@ -1,12 +1,41 @@
 package com.unisc.farmacia.model;
 
-public class Mercadoria {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+@Table(name="mercadoria")
+public class Mercadoria {
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name = "idmercadoria")
 	private int idMercadoria;
+	
+	@Column(name="nmmercadoria")
 	private String nmMercadoria;
+	
+	@Column(name="dscomplemento")
 	private String dsComplemento;
+	
+	@ManyToOne
+	@JoinColumn(name="idfornecedor")
+	@JsonBackReference
 	private Fornecedor fornecedor;
+	
+	@ManyToOne
+	@JoinColumn(name="idcategoria")
+	@JsonBackReference
 	private Categoria categoria;
+	
 	public int getIdMercadoria() {
 		return idMercadoria;
 	}
