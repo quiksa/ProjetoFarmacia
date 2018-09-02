@@ -35,11 +35,9 @@ public class Fornecedor {
 	
 	@OneToOne
 	@JoinColumn(name="idendereco")
-	 @JsonManagedReference
 	private Endereco endereco;
 	
 	@OneToMany(mappedBy="fornecedor",orphanRemoval = true)
-	@Cascade(CascadeType.ALL)
 	@JsonManagedReference
 	private List <Mercadoria> mercadorias = new ArrayList<Mercadoria>();
 	
@@ -73,6 +71,4 @@ public class Fornecedor {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-	
 }

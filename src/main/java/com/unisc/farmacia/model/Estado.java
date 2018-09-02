@@ -30,9 +30,8 @@ public class Estado {
 	@Column (name="uf")
 	private String uf;
 	
-	@OneToMany(mappedBy="estado",orphanRemoval = true)//mapear o atributo da classe cidade que faz referencia a Estado
+	@OneToMany(mappedBy="estado",orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
-	@JsonManagedReference
 	private List<Cidade>cidade = new ArrayList<Cidade>();
 		
 	public int getIdEstado() {

@@ -33,7 +33,7 @@ public class Mercadoria {
 	
 	@ManyToOne
 	@JoinColumn(name="idcategoria")
-	@JsonBackReference
+	//@JsonBackReference
 	private Categoria categoria;
 	
 	public int getIdMercadoria() {

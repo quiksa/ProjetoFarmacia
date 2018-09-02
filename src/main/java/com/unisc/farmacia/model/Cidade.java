@@ -35,12 +35,10 @@ public class Cidade {
 	
 	@ManyToOne
 	@JoinColumn(name="idestado")
-	@JsonBackReference
 	private Estado estado;
 	
-	@OneToMany(mappedBy="cidade",orphanRemoval = true)//mapear o atributo da classe cidade que faz referencia a Estado
+	@OneToMany(mappedBy="cidade",orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
-	@JsonManagedReference
 	private List<Endereco> endereco = new ArrayList<Endereco>();
 	
 	

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,6 +15,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="endereco")
@@ -33,14 +35,12 @@ public class Endereco {
 	@Column (name="bairro")
 	private String bairro;
 	
-	@OneToOne(mappedBy="endereco",orphanRemoval = true) // mappedBy = como é o nome desse atributo na classe fornecedor
-	@Cascade(CascadeType.ALL)
-	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name="idfornecedor")
 	private Fornecedor fornecedor;
 	
 	@ManyToOne
 	@JoinColumn(name="idcidade")
-	@JsonBackReference
 	private Cidade cidade;
 	
 	public int getIdEndereco() {

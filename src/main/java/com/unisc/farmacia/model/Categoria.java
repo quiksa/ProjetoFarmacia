@@ -30,7 +30,7 @@ public class Categoria {
 	
 	@OneToMany(mappedBy="categoria",orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private List<Mercadoria> mercadoria = new ArrayList<Mercadoria>();
 	
 	public int getIdCategoria() {
