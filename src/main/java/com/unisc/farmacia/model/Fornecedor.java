@@ -38,7 +38,7 @@ public class Fornecedor {
 	private Endereco endereco;
 	
 	@OneToMany(mappedBy="fornecedor",orphanRemoval = true)
-	//@JsonManagedReference
+	@JsonManagedReference
 	private List <Mercadoria> mercadorias = new ArrayList<Mercadoria>();
 	
 	public List<Mercadoria> getMercadorias() {

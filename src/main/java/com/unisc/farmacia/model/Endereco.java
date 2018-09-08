@@ -1,5 +1,8 @@
 package com.unisc.farmacia.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,6 +46,17 @@ public class Endereco {
 	@JoinColumn(name="idcidade")
 	private Cidade cidade;
 	
+	@OneToMany(mappedBy="endereco",orphanRemoval = true)
+	@JsonBackReference
+	private List<Pessoa> pessoa = new ArrayList<Pessoa>();
+	
+	
+	public List<Pessoa> getPessoa() {
+		return pessoa;
+	}
+	public void setPessoa(List<Pessoa> pessoa) {
+		this.pessoa = pessoa;
+	}
 	public int getIdEndereco() {
 		return idEndereco;
 	}
