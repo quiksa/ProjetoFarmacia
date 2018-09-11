@@ -1,10 +1,31 @@
 package com.unisc.farmacia.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="formapagamento")
 public class FormaPagamento {
 	
+	
+	@Id
+	@Column(name="idformapagamento")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idFormaPagamento;
+	
+	@Column(name="dsformapagamento")
 	private String dsFormaPagamento;
+	
+	@OneToOne
+	@JoinColumn(name="idtipopagamento")
 	private TipoPagamento tipoPagamento;
+	
 	public int getIdFormaPagamento() {
 		return idFormaPagamento;
 	}

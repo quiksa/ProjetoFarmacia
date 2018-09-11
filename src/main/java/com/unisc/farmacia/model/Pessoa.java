@@ -32,9 +32,6 @@ public class Pessoa {
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
 	
-	
-	
-	
 	public int getIdPessoa() {
 		return idPessoa;
 	}
@@ -47,7 +44,4 @@ public class Pessoa {
 	public void setNmPessoa(String nmPessoa) {
 		this.nmPessoa = nmPessoa;
 	}
-	
-	
-	
 }

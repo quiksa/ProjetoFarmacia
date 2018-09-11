@@ -38,10 +38,6 @@ public class Endereco {
 	@Column (name="bairro")
 	private String bairro;
 	
-	@OneToOne
-	@JoinColumn(name="idfornecedor")
-	private Fornecedor fornecedor;
-	
 	@ManyToOne
 	@JoinColumn(name="idcidade")
 	private Cidade cidade;
@@ -87,16 +83,5 @@ public class Endereco {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-	
-	
-
-	
 	
 }

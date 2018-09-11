@@ -1,15 +1,47 @@
 package com.unisc.farmacia.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="funcionario")
 public class Funcionario {
 
+	
+	@Id
+	@Column(name="idfuncionario")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idFuncionario;
+	
+	@OneToOne
+	@JoinColumn(name="idpessoa")
 	private Pessoa pessoa;
+	
+	@Column(name="login")
 	private String login;
+	
+	@Column(name="senha")
 	private String senha;
+	
+	@ManyToOne
+	@JoinColumn(name="idunidade")
 	private Unidade unidade;
+	
+	@Column(name="dtregistro")
 	private String dtRegistro;
+	
+	@Column(name="dtdesativacao")
 	private String dtDesativacao;
+	
+	@OneToOne
+	@JoinColumn(name="idcargo")
 	private Cargo cargo;
 	public int getIdFuncionario() {
 		return idFuncionario;

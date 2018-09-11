@@ -1,15 +1,56 @@
 package com.unisc.farmacia.model;
 
-public class Unidade {
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+@Entity
+@Table(name="unidade")
+public class Unidade {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idunidade")
 	private int idUnidade;
+	
+	@Column(name="dsunidade")
 	private String dsUnidade;
+	
+	@Column(name="nmunidade")
 	private String nmUnidade;
+	
+	@Column(name="nmreduzido")
 	private String nmRduzido;
+	
+	@Column(name="cnpj")
 	private String cnpj;
+	
+	@OneToOne
+	@JoinColumn(name="idendereco")
 	private Endereco endereco;
+	
+	@Column(name="dtregistro")
 	private String dtRegistro;
+	
+	@Column(name="dtdesativacao")
 	private String dtDesativacao;
+	
+	@OneToMany(mappedBy="unidade",orphanRemoval = true)
+	@Cascade(CascadeType.ALL)
+	private List<Funcionario> unidade = new ArrayList<Funcionario>();
+	
 	public int getIdUnidade() {
 		return idUnidade;
 	}
@@ -58,6 +99,5 @@ public class Unidade {
 	public void setDtDesativacao(String dtDesativacao) {
 		this.dtDesativacao = dtDesativacao;
 	}
-	
-	
+
 }
