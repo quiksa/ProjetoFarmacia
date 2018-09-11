@@ -9,31 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unisc.farmacia.model.Cliente;
-import com.unisc.farmacia.repository.ClienteRepository;
+import com.unisc.farmacia.model.DocFiscalItem;
+import com.unisc.farmacia.repository.DocFiscalItemRepository;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteResources {
+@RequestMapping("/docFiscalItem")
+public class DFIResources2 {
 
 	@Autowired
-	private ClienteRepository cr;
+	private DocFiscalItemRepository cr;
 	
 	@GetMapping(produces="application/json")
-	public @ResponseBody Iterable<Cliente> listaClientes() {
-		Iterable<Cliente> listaClientes = cr.findAll();
-		return listaClientes;
+	public @ResponseBody Iterable<DocFiscalItem> listaDocFiscalItems() {
+		Iterable<DocFiscalItem> listaDocFiscalItems = cr.findAll();
+		
+		return listaDocFiscalItems;
 	}
 	
 	@PostMapping()
-	public Cliente insereCliente(@RequestBody Cliente cliente) {
-		return cr.save(cliente);
+	public DocFiscalItem insereDocFiscalItem(@RequestBody DocFiscalItem docFiscaItem) {
+		return cr.save(docFiscaItem);
 	}
 	
 	@DeleteMapping
-	public Cliente deletaCliente(@RequestBody Cliente cliente) {
-		cr.delete(cliente);
-		return cliente;
+	public DocFiscalItem deletaDocFiscalItem(@RequestBody DocFiscalItem docFiscaItem) {
+		cr.delete(docFiscaItem);
+		return docFiscaItem;
 	}
 	
 }

@@ -9,31 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unisc.farmacia.model.Cliente;
-import com.unisc.farmacia.repository.ClienteRepository;
+import com.unisc.farmacia.model.DocFiscal;
+import com.unisc.farmacia.repository.DocFiscalRepository;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteResources {
+@RequestMapping("/docFiscal")
+public class DocFiscalResources {
 
 	@Autowired
-	private ClienteRepository cr;
+	private DocFiscalRepository cr;
 	
 	@GetMapping(produces="application/json")
-	public @ResponseBody Iterable<Cliente> listaClientes() {
-		Iterable<Cliente> listaClientes = cr.findAll();
-		return listaClientes;
+	public @ResponseBody Iterable<DocFiscal> listaDocFiscal() {
+		Iterable<DocFiscal> listaDocFiscals = cr.findAll();	
+		return listaDocFiscals;
 	}
 	
 	@PostMapping()
-	public Cliente insereCliente(@RequestBody Cliente cliente) {
-		return cr.save(cliente);
+	public DocFiscal insereDocFiscal(@RequestBody DocFiscal docFiscal) {
+		return cr.save(docFiscal);
 	}
 	
 	@DeleteMapping
-	public Cliente deletaCliente(@RequestBody Cliente cliente) {
-		cr.delete(cliente);
-		return cliente;
+	public DocFiscal deletaDocFiscal(@RequestBody DocFiscal docFiscal) {
+		cr.delete(docFiscal);
+		return docFiscal;
 	}
 	
 }

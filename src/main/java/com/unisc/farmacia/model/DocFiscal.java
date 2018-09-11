@@ -1,16 +1,50 @@
 package com.unisc.farmacia.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="docfiscal")
 public class DocFiscal {
 
+	@Id
+	@Column(name="iddocfiscal")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idDocFiscal;
+	
+	@OneToOne
+	@JoinColumn(name="idfuncionario")
 	private Funcionario funcionario;
+	
+	@Column(name="dtregistro")
 	private String dtRegistro;
+	
+	@Column(name="vltotal")
 	private double vlTotal;
+	
+	@Column(name="tpoperacao")
 	private String tpOperacao;
+	
+	@Column(name="status")
 	private String status;
+	
+	@OneToOne
+	@JoinColumn(name="idcliente")
 	private Cliente cliente;
+	
+	@Column(name="cnpjemissor")
 	private String cnpjEmissor;
+	
+	@OneToOne
+	@JoinColumn(name="idformapagamento")
 	private FormaPagamento formaPagamento;
+	
 	public int getIdDocFiscal() {
 		return idDocFiscal;
 	}
