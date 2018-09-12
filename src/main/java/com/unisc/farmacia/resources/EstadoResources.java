@@ -1,8 +1,11 @@
 package com.unisc.farmacia.resources;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,26 +16,31 @@ import com.unisc.farmacia.model.Estado;
 import com.unisc.farmacia.repository.EstadoRepository;
 
 @RestController
-@RequestMapping("/estado")
 public class EstadoResources {
-	
+
 	@Autowired
 	private EstadoRepository er;
-	
-	@GetMapping(produces="application/json")
+
+	@GetMapping("/estado")
 	public @ResponseBody Iterable<Estado> listaEstados() {
 		Iterable<Estado> listaEstados = er.findAll();
 		return listaEstados;
 	}
-	
-	@PostMapping()
+
+	@PostMapping("/estado")
 	public Estado insereEstado(@RequestBody Estado estado) {
 		return er.save(estado);
 	}
-	
-	@DeleteMapping
+
+	@DeleteMapping("/estado")
 	public Estado deletaEstado(@RequestBody Estado estado) {
 		er.delete(estado);
+		return estado;
+	}
+
+	@GetMapping("/estado/{id}")
+	public @ResponseBody Optional<Estado> retornaEstadoPorId(@PathVariable Integer id) {
+		Optional<Estado> estado = er.findById(id);
 		return estado;
 	}
 
