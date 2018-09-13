@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,12 +49,16 @@ public class FuncionarioResources {
 		return funcionario;
 	}
 	
-	@GetMapping("/funcionario/{login}/{senha}")
-	public @ResponseBody Optional<Funcionario>retornaFuncionario(@RequestParam String login, @RequestParam String senha){
-		
-		Optional<Funcionario>funcionario = fr.listaFuncionario(login,senha);
-		return funcionario;
-		
+	
+	// http://localhost:8080/funcionario/signin?login=Ascostofes&senha=ascostofes
+	@RequestMapping(value="/funcionario/signin", method=RequestMethod.POST)
+	public boolean retornaFuncionario(@RequestParam("login") String login,
+									  @RequestParam("senha") String senha){
+		if(fr.listaFuncionario(login, senha).isEmpty()) {
+			return false;
+		}else{
+			return true;
+		}		
 	}
 	
 	
