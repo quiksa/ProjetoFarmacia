@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +43,12 @@ public class EstadoResources {
 	@GetMapping("/estado/{id}")
 	public @ResponseBody Optional<Estado> retornaEstadoPorId(@PathVariable Integer id) {
 		Optional<Estado> estado = er.findById(id);
+		return estado;
+	}
+	
+	@RequestMapping(value="/estado/findEstadoById", method=RequestMethod.POST)
+	public Optional<Estado> findEstadoById(@RequestParam("idEstado") int idEstado){
+		Optional<Estado> estado = er.findEstadoById(idEstado);
 		return estado;
 	}
 

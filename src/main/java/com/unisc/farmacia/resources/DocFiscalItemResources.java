@@ -15,7 +15,7 @@ import com.unisc.farmacia.model.DocFiscalItem;
 import com.unisc.farmacia.repository.DocFiscalItemRepository;
 
 @RestController
-public class DFIResources2 {
+public class DocFiscalItemResources {
 
 	@Autowired
 	private DocFiscalItemRepository cr;
