@@ -38,7 +38,7 @@ public class DocFiscal {
 	@JoinColumn(name="idcliente")
 	private Cliente cliente;
 	
-	@Column(name="cnpjemissor")
+	@Column(name="nrcnpjemissor")
 	private String cnpjEmissor;
 	
 	@OneToOne

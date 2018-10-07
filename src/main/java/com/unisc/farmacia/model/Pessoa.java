@@ -17,18 +17,39 @@ public class Pessoa {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPessoa;
 	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
 	@Column (name="nmpessoa")
 	private String nmPessoa;
 	
 	@ManyToOne
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
+	
+	public String getNrcpf() {
+		return nrcpf;
+	}
+	public void setNrcpf(String nrcpf) {
+		this.nrcpf = nrcpf;
+	}
+	public String getNrtelefone() {
+		return nrtelefone;
+	}
+	public void setNrtelefone(String nrtelefone) {
+		this.nrtelefone = nrtelefone;
+	}
+	@Column(name="nrcpf")
+	private String  nrcpf;
+	
+	@Column(name="nrtelefone")
+	private String nrtelefone;
+	
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	
 	public int getIdPessoa() {
 		return idPessoa;

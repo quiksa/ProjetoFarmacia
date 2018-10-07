@@ -28,9 +28,6 @@ public class Cidade {
 	@Column(name="nmcidade")
 	private String nmCidade;
 	
-	@Column(name="cep")
-	private String cep;
-	
 	@ManyToOne
 	@JoinColumn(name="idestado")
 	private Estado estado;
@@ -52,20 +49,11 @@ public class Cidade {
 	public void setNmCidade(String nmCidade) {
 		this.nmCidade = nmCidade;
 	}
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+
 	public Estado getEstado() {
 		return estado;
 	}
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
 }

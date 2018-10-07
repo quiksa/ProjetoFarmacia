@@ -38,14 +38,20 @@ public class CargoResources {
 		return cargo;
 	}
 	
-	
 	// POR ITEM UNICO
 	
-	@GetMapping("/cargo/{id}")
+	@GetMapping("/cargo/id={id}")
 	public @ResponseBody Optional<Cargo> retornaCargoPorId(@PathVariable Integer id) {
-		Optional<Cargo> cargo = cr.findById(id);
+		Optional<Cargo> cargo = cr.findCargoById(id);
 		return cargo;
 	}
+	
+	@GetMapping("/cargo/ds={ds}")
+	public @ResponseBody Optional<Cargo> retornaCargoPorId(@PathVariable String ds) {
+		Optional<Cargo> cargo = cr.findCargoByDs(ds);
+		return cargo;
+	}
+	
 	
 	
 }

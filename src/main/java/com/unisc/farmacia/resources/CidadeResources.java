@@ -39,7 +39,7 @@ public class CidadeResources {
 
 	// POR ITEM UNICO
 
-	@GetMapping("/cidade/{id}")
+	@GetMapping("/cidade={id}")
 	public @ResponseBody Optional<Cidade> retornaCidadePorId(@PathVariable Integer id) {
 		Optional<Cidade> cidade = cr.findById(id);
 		return cidade;

@@ -27,9 +27,6 @@ public class Fornecedor {
 	@Column(name="cnpj")
 	private String cnpj;
 	
-	@Column(name="dscomplemento")
-	private String dsComplemento;
-	
 	@OneToOne
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
@@ -56,12 +53,7 @@ public class Fornecedor {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public String getDsComplemento() {
-		return dsComplemento;
-	}
-	public void setDsComplemento(String dsComplemento) {
-		this.dsComplemento = dsComplemento;
-	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}

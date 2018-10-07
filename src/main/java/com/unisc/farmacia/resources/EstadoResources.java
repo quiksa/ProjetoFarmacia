@@ -40,16 +40,12 @@ public class EstadoResources {
 		return estado;
 	}
 
-	@GetMapping("/estado/{id}")
+	@GetMapping("/estado={id}")
 	public @ResponseBody Optional<Estado> retornaEstadoPorId(@PathVariable Integer id) {
 		Optional<Estado> estado = er.findById(id);
 		return estado;
 	}
 	
-	@RequestMapping(value="/estado/findEstadoById", method=RequestMethod.POST)
-	public Optional<Estado> findEstadoById(@RequestParam("idEstado") int idEstado){
-		Optional<Estado> estado = er.findEstadoById(idEstado);
-		return estado;
-	}
+		
 
 }
