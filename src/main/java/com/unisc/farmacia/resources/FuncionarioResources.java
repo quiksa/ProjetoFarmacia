@@ -1,5 +1,6 @@
 package com.unisc.farmacia.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class FuncionarioResources {
 
 		return listaFuncionarios;
 	}
-
+	
 	@PostMapping("/funcionario")
 	public Funcionario insereFuncionario(@RequestBody Funcionario funcionario) {
 		return fr.save(funcionario);
@@ -43,10 +44,16 @@ public class FuncionarioResources {
 
 	// Por item único
 
-	@GetMapping("/funcionario/{id}")
+	@GetMapping("/funcionario/id={id}")
 	public @ResponseBody Optional<Funcionario> retornaFuncionarioPorId(@PathVariable Integer id) {
 		Optional<Funcionario> funcionario = fr.findById(id);
 		return funcionario;
+	}
+	
+	@GetMapping("/funcionario/nome={nome}")
+	public @ResponseBody Optional<Object> buscaFuncporNome(@PathVariable String nome){
+		Optional<Object>funcs = fr.buscaCargoFuncionario(nome);
+		return funcs;
 	}
 	
 	
@@ -60,6 +67,7 @@ public class FuncionarioResources {
 			return true;
 		}		
 	}
+	
 	
 	
 

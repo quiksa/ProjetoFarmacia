@@ -25,12 +25,6 @@ public class PessoaResources {
 		
 		return listaPessoas;
 	}
-	/*
-	public @ResponseBody Optional<Pessoa> exibePessoa(int id){
-		Optional<Pessoa> pessoa = pr.findById(id);
-		return pessoa;
-	}
-	*/
 	
 	@PostMapping()
 	public Pessoa inserePessoa(@RequestBody Pessoa pessoa) {
