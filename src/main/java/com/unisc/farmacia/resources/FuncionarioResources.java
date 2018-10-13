@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +32,7 @@ public class FuncionarioResources {
 
 		return listaFuncionarios;
 	}
-	
+
 	@PostMapping("/funcionario")
 	public Funcionario insereFuncionario(@RequestBody Funcionario funcionario) {
 		return fr.save(funcionario);
@@ -49,26 +51,25 @@ public class FuncionarioResources {
 		Optional<Funcionario> funcionario = fr.findById(id);
 		return funcionario;
 	}
-	
+
 	@GetMapping("/funcionario/nome={nome}")
-	public @ResponseBody Optional<Object> buscaFuncporNome(@PathVariable String nome){
-		Optional<Object>funcs = fr.buscaCargoFuncionario(nome);
+	public @ResponseBody Optional<Object> buscaFuncporNome(@PathVariable String nome) {
+		Optional<Object> funcs = fr.buscaCargoFuncionario(nome);
 		return funcs;
 	}
-	
-	
+
 	// http://localhost:8080/funcionario/signin?login=Ascostofes&senha=ascostofes
-	@RequestMapping(value="/funcionario/signin", method=RequestMethod.POST)
-	public boolean retornaFuncionario(@RequestParam("login") String login,
-									  @RequestParam("senha") String senha){
-		if(fr.listaFuncionario(login, senha).isEmpty()) {
-			return false;
-		}else{
-			return true;
-		}		
+	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST)
+	public ResponseEntity<Funcionario> retornaFuncionario(@RequestParam("login") String login,
+			@RequestParam("senha") String senha) {
+		Funcionario funcionario = new Funcionario();
+		funcionario = fr.listaFuncionario(login, senha);
+		if (funcionario.equals(null)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Funcionario>(funcionario, HttpStatus.OK);
+		}
+
 	}
-	
-	
-	
 
 }

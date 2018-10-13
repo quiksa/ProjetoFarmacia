@@ -1,6 +1,5 @@
 package com.unisc.farmacia.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +10,7 @@ import com.unisc.farmacia.model.Funcionario;
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
 
 	@Query(value = "select * from funcionario where login =?1 and senha=?2", nativeQuery = true)
-	List<Funcionario> listaFuncionario(String login, String senha);
+	Funcionario listaFuncionario(String login, String senha);
 
 	// seleciona o id,cargo e nome do funcionario pelo nome
 	@Query(value = "SELECT f.idfuncionario, c.dscargo, p.nmpessoa from funcionario f, cargo c, pessoa p where"
