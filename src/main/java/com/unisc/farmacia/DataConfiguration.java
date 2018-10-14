@@ -31,8 +31,6 @@ public class DataConfiguration {
 		adptr.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
 		adptr.setPrepareConnection(true);
 		return adptr;
-	}
-	
-	
+	}	
 	
 }
