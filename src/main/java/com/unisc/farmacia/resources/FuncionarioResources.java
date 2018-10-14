@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,9 +61,11 @@ public class FuncionarioResources {
 
 	// http://localhost:8080/funcionario/signin?login=Ascostofes&senha=ascostofes
 	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST)
-	public ResponseEntity<Funcionario> retornaFuncionario(@RequestParam("login") String login,
-			@RequestParam("senha") String senha) {
+	public ResponseEntity<Funcionario> retornaFuncionario(@RequestParam(required=false,name="login") String login,
+			@RequestParam(required=false, name="senha") String senha) {
 		Funcionario funcionario = new Funcionario();
+		System.out.println("senha: "+senha);
+		System.out.println("login: "+login);
 		funcionario = fr.listaFuncionario(login, senha);
 		if (funcionario.equals(null)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
