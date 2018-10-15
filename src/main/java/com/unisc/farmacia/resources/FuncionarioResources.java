@@ -1,13 +1,10 @@
 package com.unisc.farmacia.resources;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -61,18 +57,16 @@ public class FuncionarioResources {
 	}
 
 	// http://localhost:8080/funcionario/signin?login=Ascostofes&senha=ascostofes
-	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST)
-	public ResponseEntity<Funcionario> retornaFuncionario(@RequestBody Map<String, String> parameters) {
-		String senha = parameters.get("senha");
-		String login = parameters.get("login");
-		Funcionario funcionario = new Funcionario();
-		funcionario = fr.listaFuncionario(login, senha);
-		if (funcionario.equals(null)) {
+	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST,consumes="application/json")
+	public ResponseEntity<Funcionario> retornaFuncionario(@RequestBody Funcionario f){
+		String senha = f.getSenha();
+		String login = f.getLogin();
+		Funcionario func = new Funcionario();
+		func = fr.listaFuncionario(login, senha);
+		if (func.equals(null)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			return new ResponseEntity<Funcionario>(funcionario, HttpStatus.OK);
+			return new ResponseEntity<Funcionario>(func, HttpStatus.OK);
 		}
-
 	}
-
 }

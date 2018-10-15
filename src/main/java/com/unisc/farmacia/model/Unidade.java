@@ -41,10 +41,10 @@ public class Unidade {
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
 	
-	@Column(name="dtregistro")
+	@Column(name="dhinsert")
 	private String dtRegistro;
 	
-	@Column(name="dtdesativacao")
+	@Column(name="dhdesativacao")
 	private String dtDesativacao;
 	
 	@OneToMany(mappedBy="unidade",orphanRemoval = true)

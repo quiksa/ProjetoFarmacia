@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.Nullable;
+
 @Entity
 @Table(name="funcionario")
 public class Funcionario {
@@ -34,10 +36,11 @@ public class Funcionario {
 	@JoinColumn(name="idunidade")
 	private Unidade unidade;
 	
-	@Column(name="dtregistro")
+	@Column(name="dhinsert")
 	private String dtRegistro;
 	
-	@Column(name="dtdesativacao")
+	
+	@Column(name="dhdesativacao")
 	private String dtDesativacao;
 	
 	@OneToOne
