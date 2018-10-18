@@ -1,5 +1,6 @@
 package com.unisc.farmacia.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,10 @@ public class CidadeResources {
 		return cidade;
 	}
 
+	@GetMapping("/cidade/estado={estado}")
+	public @ResponseBody List<Cidade> todosPorEstado(@PathVariable String estado) {
+		List<Cidade> cidade = cr.findAllByIdEstado(estado);
+		return cidade;
+	}
 	
 }
