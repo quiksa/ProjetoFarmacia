@@ -14,7 +14,9 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 	@Query(value="select * from cidade e where e.idcidade =?1",nativeQuery = true)
 	Optional<Estado> findEstadoById(int idEstado);
 
-	@Query(value="select * from cidade c, estado e where e.idestado=c.idestado and e.nmestado=?1",nativeQuery=true)
-	List<Cidade> findAllByIdEstado(String nmEstado);
+	@Query(value="select * from cidade c "
+			+ "inner join estado e on e.idestado = c.idestado "
+			+ "where c.idestado=?1 order by c.nmcidade",nativeQuery=true)
+	List<Cidade> findAllByIdEstado(int idEstado);
 	
 }

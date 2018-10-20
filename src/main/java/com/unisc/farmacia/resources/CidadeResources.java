@@ -47,7 +47,7 @@ public class CidadeResources {
 	}
 
 	@GetMapping("/cidade/estado={estado}")
-	public @ResponseBody List<Cidade> todosPorEstado(@PathVariable String estado) {
+	public @ResponseBody List<Cidade> todosPorEstado(@PathVariable int estado) {
 		List<Cidade> cidade = cr.findAllByIdEstado(estado);
 		return cidade;
 	}
