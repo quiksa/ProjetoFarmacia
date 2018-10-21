@@ -30,9 +30,6 @@ public class HistoricoPreco {
 	@Column(name="vlantigo")
 	private double vlAntigo;
 	
-	@Column(name="dtregistro")
-	private String dtRegistro;
-	
 	public int getIdHistoricoPreco() {
 		return idHistoricoPreco;
 	}
@@ -56,12 +53,6 @@ public class HistoricoPreco {
 	}
 	public void setVlAntigo(double vlAntigo) {
 		this.vlAntigo = vlAntigo;
-	}
-	public String getDtRegistro() {
-		return dtRegistro;
-	}
-	public void setDtRegistro(String dtRegistro) {
-		this.dtRegistro = dtRegistro;
 	}
 	
 }

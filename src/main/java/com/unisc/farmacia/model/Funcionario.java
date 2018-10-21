@@ -1,5 +1,7 @@
 package com.unisc.farmacia.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,12 +38,8 @@ public class Funcionario {
 	@JoinColumn(name="idunidade")
 	private Unidade unidade;
 	
-	@Column(name="dhinsert")
-	private String dtRegistro;
-	
-	
 	@Column(name="dhdesativacao")
-	private String dtDesativacao;
+	private LocalDate dtDesativacao;
 	
 	@OneToOne
 	@JoinColumn(name="idcargo")
@@ -76,26 +74,17 @@ public class Funcionario {
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
-	public String getDtRegistro() {
-		return dtRegistro;
-	}
-	public void setDtRegistro(String dtRegistro) {
-		this.dtRegistro = dtRegistro;
-	}
-	public String getDtDesativacao() {
-		return dtDesativacao;
-	}
-	public void setDtDesativacao(String dtDesativacao) {
-		this.dtDesativacao = dtDesativacao;
-	}
 	public Cargo getCargo() {
 		return cargo;
 	}
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
-	
-	
-	
+	public LocalDate getDtDesativacao() {
+		return dtDesativacao;
+	}
+	public void setDtDesativacao(LocalDate dtDesativacao) {
+		this.dtDesativacao = dtDesativacao;
+	}
 	
 }

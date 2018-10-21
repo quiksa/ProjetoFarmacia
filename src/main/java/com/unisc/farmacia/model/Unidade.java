@@ -1,5 +1,6 @@
 package com.unisc.farmacia.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -41,11 +43,8 @@ public class Unidade {
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
 	
-	@Column(name="dhinsert")
-	private String dtRegistro;
-	
 	@Column(name="dhdesativacao")
-	private String dtDesativacao;
+	private LocalDate dtDesativacao;
 	
 	@OneToMany(mappedBy="unidade",orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
@@ -87,16 +86,10 @@ public class Unidade {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public String getDtRegistro() {
-		return dtRegistro;
-	}
-	public void setDtRegistro(String dtRegistro) {
-		this.dtRegistro = dtRegistro;
-	}
-	public String getDtDesativacao() {
+	public LocalDate getDtDesativacao() {
 		return dtDesativacao;
 	}
-	public void setDtDesativacao(String dtDesativacao) {
+	public void setDtDesativacao(LocalDate dtDesativacao) {
 		this.dtDesativacao = dtDesativacao;
 	}
 

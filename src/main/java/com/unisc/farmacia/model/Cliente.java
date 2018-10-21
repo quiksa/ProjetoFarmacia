@@ -22,8 +22,6 @@ public class Cliente {
 	@JoinColumn(name="idpessoa")
 	private Pessoa pessoa;
 	
-	@Column(name="dtregistro")
-	private String dtRegistro;
 	public int getIdCliente() {
 		return idCliente;
 	}
@@ -36,15 +34,4 @@ public class Cliente {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	public String getDtRegistro() {
-		return dtRegistro;
-	}
-	public void setDtRegistro(String dtRegistro) {
-		this.dtRegistro = dtRegistro;
-	}
-	
-	
-	
-	
-	
 }

@@ -22,9 +22,6 @@ public class DocFiscal {
 	@JoinColumn(name="idfuncionario")
 	private Funcionario funcionario;
 	
-	@Column(name="dtregistro")
-	private String dtRegistro;
-	
 	@Column(name="vltotal")
 	private double vlTotal;
 	
@@ -56,12 +53,6 @@ public class DocFiscal {
 	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
-	}
-	public String getDtRegistro() {
-		return dtRegistro;
-	}
-	public void setDtRegistro(String dtRegistro) {
-		this.dtRegistro = dtRegistro;
 	}
 	public double getVlTotal() {
 		return vlTotal;

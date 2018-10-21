@@ -5,7 +5,6 @@ public class EstoqueItem {
 	private int idEstoqueItem;
 	private String dtFabricacao;
 	private String dtValidade;
-	private String dtRegistro;
 	private int quantidade;
 	private double vlCompra;
 	private String dsLote;
@@ -29,12 +28,6 @@ public class EstoqueItem {
 	}
 	public void setDtValidade(String dtValidade) {
 		this.dtValidade = dtValidade;
-	}
-	public String getDtRegistro() {
-		return dtRegistro;
-	}
-	public void setDtRegistro(String dtRegistro) {
-		this.dtRegistro = dtRegistro;
 	}
 	public int getQuantidade() {
 		return quantidade;
