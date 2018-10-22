@@ -39,6 +39,9 @@ public class Unidade {
 	@Column(name="cnpj")
 	private String cnpj;
 	
+	@Transient
+	private int idCidade;
+	
 	@OneToOne
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
@@ -91,6 +94,12 @@ public class Unidade {
 	}
 	public void setDtDesativacao(LocalDate dtDesativacao) {
 		this.dtDesativacao = dtDesativacao;
+	}
+	public int getIdCidade() {
+		return idCidade;
+	}
+	public void setIdCidade(int idCidade) {
+		this.idCidade = idCidade;
 	}
 
 }

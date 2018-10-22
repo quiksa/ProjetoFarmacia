@@ -1,5 +1,7 @@
 package com.unisc.farmacia.resources;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unisc.farmacia.model.Cidade;
 import com.unisc.farmacia.model.Unidade;
+import com.unisc.farmacia.repository.CidadeRepository;
 import com.unisc.farmacia.repository.EnderecoRepository;
 import com.unisc.farmacia.repository.UnidadeRepository;
 
@@ -23,6 +27,7 @@ public class UnidadeResources {
 	@Autowired
 	private UnidadeRepository ur;
 	private EnderecoRepository er;
+	private CidadeRepository cr;
 	
 	@GetMapping(produces="application/json")
 	public @ResponseBody Iterable<Unidade> listaUnidades() {
@@ -44,13 +49,13 @@ public class UnidadeResources {
 	
 	@RequestMapping(value = "/insertOrUpdadeUnidade", method = RequestMethod.POST,consumes="application/json")
 	public ResponseEntity<Unidade> retornaUnidade(@RequestBody Unidade unidade){
-		try {	
-			ur.save(unidade);
+		
+			cr.findById(unidade.getIdCidade());
+			//cid.getEstado();
 			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			e.getMessage();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		
+			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
 	}
 	
 	@DeleteMapping

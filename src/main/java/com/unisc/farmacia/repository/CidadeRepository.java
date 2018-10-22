@@ -12,7 +12,7 @@ import com.unisc.farmacia.model.Estado;
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 
 	@Query(value="select * from cidade e where e.idcidade =?1",nativeQuery = true)
-	Optional<Estado> findEstadoById(int idEstado);
+	Cidade findCidadeById(int idCidade);
 
 	@Query(value="select * from cidade c "
 			+ "inner join estado e on e.idestado = c.idestado "
