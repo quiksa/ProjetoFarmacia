@@ -40,7 +40,16 @@ public class Unidade {
 	private String cnpj;
 	
 	@Transient
-	private int idCidade;
+	private String idCidade;
+	
+	@Transient
+	private String nmBairro;
+	
+	@Transient
+	private String dsComplemento;
+	
+	@Transient
+	private String nmRua;
 	
 	@OneToOne
 	@JoinColumn(name="idendereco")
@@ -95,11 +104,30 @@ public class Unidade {
 	public void setDtDesativacao(LocalDate dtDesativacao) {
 		this.dtDesativacao = dtDesativacao;
 	}
-	public int getIdCidade() {
+	public String getIdCidade() {
 		return idCidade;
 	}
-	public void setIdCidade(int idCidade) {
+	public void setIdCidade(String idCidade) {
 		this.idCidade = idCidade;
 	}
+	public String getNmBairro() {
+		return nmBairro;
+	}
+	public void setNmBairro(String nmBairro) {
+		this.nmBairro = nmBairro;
+	}
+	public String getDsComplemento() {
+		return dsComplemento;
+	}
+	public void setDsComplemento(String dsComplemento) {
+		this.dsComplemento = dsComplemento;
+	}
+	public String getNmRua() {
+		return nmRua;
+	}
+	public void setNmRua(String nmRua) {
+		this.nmRua = nmRua;
+	}
+	
 
 }
