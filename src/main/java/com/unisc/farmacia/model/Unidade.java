@@ -38,7 +38,8 @@ public class Unidade {
 	
 	@Column(name="cnpj")
 	private String cnpj;
-	
+
+	//Transients do endereço ----------------------------------
 	@Transient
 	private String idCidade;
 	
@@ -50,7 +51,7 @@ public class Unidade {
 	
 	@Transient
 	private String nmRua;
-	
+	//----------------------------------------------------------
 	@OneToOne
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;

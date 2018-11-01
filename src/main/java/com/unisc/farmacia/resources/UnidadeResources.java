@@ -1,4 +1,4 @@
-package com.unisc.farmacia.resources;
+			package com.unisc.farmacia.resources;
 
 import java.util.Optional;
 
@@ -39,10 +39,6 @@ public class UnidadeResources {
 
 		return listaUnidades;
 	}
-	/*
-	 * public @ResponseBody Optional<Unidade> exibeUnidade(int id){
-	 * Optional<Unidade> unidade = ur.findById(id); return unidade; }
-	 */
 
 	@PostMapping()
 	public Unidade insereUnidade(@RequestBody Unidade unidade) {

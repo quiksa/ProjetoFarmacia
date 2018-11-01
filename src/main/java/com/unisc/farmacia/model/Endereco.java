@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -33,6 +34,7 @@ public class Endereco {
 	@Column (name="bairro")
 	private String bairro;
 	
+	//@Transient
 	@ManyToOne
 	@JoinColumn(name="idcidade")
 	private Cidade cidade;
