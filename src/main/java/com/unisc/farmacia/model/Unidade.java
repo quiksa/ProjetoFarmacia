@@ -51,8 +51,12 @@ public class Unidade {
 	
 	@Transient
 	private String nmRua;
+	
+	@Transient
+	private String idendereco;
 	//----------------------------------------------------------
 	@OneToOne
+	@Cascade(CascadeType.ALL)
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
 	
@@ -129,6 +133,11 @@ public class Unidade {
 	public void setNmRua(String nmRua) {
 		this.nmRua = nmRua;
 	}
-	
+	public String getIdendereco() {
+		return idendereco;
+	}
+	public void setIdendereco(String idendereco) {
+		this.idendereco = idendereco;
+	}
 
 }

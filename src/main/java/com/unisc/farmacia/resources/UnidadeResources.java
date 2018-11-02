@@ -1,4 +1,4 @@
-			package com.unisc.farmacia.resources;
+package com.unisc.farmacia.resources;
 
 import java.util.Optional;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,26 +51,52 @@ public class UnidadeResources {
 	@RequestMapping(value = "/insertOrUpdadeUnidade", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Unidade> retornaUnidade(@RequestBody Unidade unidade) {
 		try {
+<<<<<<< HEAD
 			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("")
 					&& !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
 				//faz busca de uma cidade com argumento passado pelo front
+=======
+			Unidade unid = new Unidade();
+			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("") && !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
+>>>>>>> 18f88f9100e30e8916e62bdd2e476f48c0696f9e
 				Optional<Cidade> un = cr.findById(Integer.parseInt(unidade.getIdCidade()));
 				Endereco end = new Endereco();
 				end.setCidade(un.get());
 				end.setBairro(unidade.getNmBairro());
 				end.setDsComplemento(unidade.getDsComplemento());
 				end.setNmRua(unidade.getNmRua());
+				if(unidade.getIdendereco() != null) {
+					end.setIdEndereco(Integer.parseInt(unidade.getIdendereco()));
+				}
 				er.save(end);
 				er.flush();
-				Unidade unid = new Unidade();
+				
 				unid.setEndereco(end);
 				unid.setCnpj(unidade.getCnpj());
 				unid.setDsUnidade(unidade.getDsUnidade());
 				unid.setNmUnidade(unidade.getNmUnidade());
 				unid.setNmRduzido(unidade.getNmRduzido());
+				if(!String.valueOf(unidade.getIdUnidade()).equals("0")) {
+					unid.setIdUnidade(unidade.getIdUnidade());
+				}
 				ur.save(unid);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>(unid, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/deletaUnidade", method = RequestMethod.GET)
+	public ResponseEntity<Unidade> delUnidade(@RequestParam(value = "idunidade", required = true, name = "idunidade") int idunidade) {
+		try {
+			Optional<Unidade> unidade = ur.findById(idunidade);
+			if (unidade.isPresent()) {
+				ur.delete(unidade.get());
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {

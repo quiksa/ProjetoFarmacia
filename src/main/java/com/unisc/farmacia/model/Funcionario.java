@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="funcionario")
