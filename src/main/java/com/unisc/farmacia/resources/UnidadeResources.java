@@ -52,6 +52,7 @@ public class UnidadeResources {
 		try {
 			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("")
 					&& !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
+				//faz busca de uma cidade com argumento passado pelo front
 				Optional<Cidade> un = cr.findById(Integer.parseInt(unidade.getIdCidade()));
 				Endereco end = new Endereco();
 				end.setCidade(un.get());

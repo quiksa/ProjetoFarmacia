@@ -20,6 +20,12 @@ public class Pessoa {
 	@Column (name="nmpessoa")
 	private String nmPessoa;
 	
+	@Column(name="nrcpf")
+	private String  nrcpf;
+	
+	@Column(name="nrtelefone")
+	private String nrtelefone;
+	
 	@ManyToOne
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
@@ -35,14 +41,7 @@ public class Pessoa {
 	}
 	public void setNrtelefone(String nrtelefone) {
 		this.nrtelefone = nrtelefone;
-	}
-	@Column(name="nrcpf")
-	private String  nrcpf;
-	
-	@Column(name="nrtelefone")
-	private String nrtelefone;
-	
-	
+	}	
 	public Endereco getEndereco() {
 		return endereco;
 	}
