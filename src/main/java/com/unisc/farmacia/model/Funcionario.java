@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="funcionario")

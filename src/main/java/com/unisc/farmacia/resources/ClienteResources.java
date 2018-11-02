@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unisc.farmacia.model.Cidade;
 import com.unisc.farmacia.model.Cliente;
 import com.unisc.farmacia.model.Endereco;
 import com.unisc.farmacia.model.Pessoa;
-import com.unisc.farmacia.repository.CidadeRepository;
 import com.unisc.farmacia.repository.ClienteRepository;
 import com.unisc.farmacia.repository.EnderecoRepository;
 import com.unisc.farmacia.repository.PessoaRepository;
