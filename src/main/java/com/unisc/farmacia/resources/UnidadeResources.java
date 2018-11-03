@@ -51,14 +51,9 @@ public class UnidadeResources {
 	@RequestMapping(value = "/insertOrUpdadeUnidade", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Unidade> retornaUnidade(@RequestBody Unidade unidade) {
 		try {
-<<<<<<< HEAD
-			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("")
-					&& !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
-				//faz busca de uma cidade com argumento passado pelo front
-=======
 			Unidade unid = new Unidade();
 			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("") && !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
->>>>>>> 18f88f9100e30e8916e62bdd2e476f48c0696f9e
+				//faz busca de uma cidade com argumento passado pelo front
 				Optional<Cidade> un = cr.findById(Integer.parseInt(unidade.getIdCidade()));
 				Endereco end = new Endereco();
 				end.setCidade(un.get());
@@ -70,7 +65,6 @@ public class UnidadeResources {
 				}
 				er.save(end);
 				er.flush();
-				
 				unid.setEndereco(end);
 				unid.setCnpj(unidade.getCnpj());
 				unid.setDsUnidade(unidade.getDsUnidade());

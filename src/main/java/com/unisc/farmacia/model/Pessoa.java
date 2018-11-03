@@ -22,23 +22,14 @@ public class Pessoa {
 
 	@Column(name = "nmpessoa")
 	private String nmPessoa;
-<<<<<<< HEAD
 	
-	@Column(name="nrcpf")
-	private String  nrcpf;
 	
-	@Column(name="nrtelefone")
-	private String nrtelefone;
-	
-=======
-
 	@Column(name = "sgsexo")
 	private String sgsexo;
 
 	@Column(name = "email")
 	private String email;
 
->>>>>>> 18f88f9100e30e8916e62bdd2e476f48c0696f9e
 	@ManyToOne
 	@JoinColumn(name = "idendereco")
 	private Endereco endereco;
@@ -57,9 +48,6 @@ public class Pessoa {
 
 	public void setNrtelefone(String nrtelefone) {
 		this.nrtelefone = nrtelefone;
-<<<<<<< HEAD
-	}	
-=======
 	}
 
 	@Column(name = "nrcpf")
@@ -71,7 +59,6 @@ public class Pessoa {
 	@Column(name = "dtnascimento")
 	private LocalDate dtnascimento;
 
->>>>>>> 18f88f9100e30e8916e62bdd2e476f48c0696f9e
 	public Endereco getEndereco() {
 		return endereco;
 	}
