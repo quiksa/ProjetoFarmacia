@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "pessoa")
 public class Pessoa {
@@ -22,8 +25,7 @@ public class Pessoa {
 
 	@Column(name = "nmpessoa")
 	private String nmPessoa;
-	
-	
+
 	@Column(name = "sgsexo")
 	private String sgsexo;
 
@@ -32,6 +34,7 @@ public class Pessoa {
 
 	@ManyToOne
 	@JoinColumn(name = "idendereco")
+	@Cascade(CascadeType.ALL)
 	private Endereco endereco;
 
 	public String getNrcpf() {

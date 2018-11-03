@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.apache.catalina.valves.CrawlerSessionManagerValve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import com.unisc.farmacia.model.Cargo;
 import com.unisc.farmacia.model.Endereco;
 import com.unisc.farmacia.model.Funcionario;
 import com.unisc.farmacia.model.Pessoa;
-import com.unisc.farmacia.model.Unidade;
+
 import com.unisc.farmacia.repository.CargoRepository;
 import com.unisc.farmacia.repository.EnderecoRepository;
 import com.unisc.farmacia.repository.FuncionarioRepository;
@@ -39,8 +38,6 @@ public class FuncionarioResources {
 	private EnderecoRepository er;
 	@Autowired
 	private CargoRepository cr;
-	
-	
 
 	@GetMapping("/funcionario")
 	public @ResponseBody Iterable<Funcionario> listaFuncionarios() {
@@ -75,8 +72,8 @@ public class FuncionarioResources {
 	}
 
 	// http://localhost:8080/funcionario/signin?login=Ascostofes&senha=ascostofes
-	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST,consumes="application/json")
-	public ResponseEntity<Funcionario> retornaFuncionario(@RequestBody Funcionario f){
+	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<Funcionario> retornaFuncionario(@RequestBody Funcionario f) {
 		String senha = f.getSenha();
 		String login = f.getLogin();
 		Funcionario func = new Funcionario();
@@ -87,14 +84,14 @@ public class FuncionarioResources {
 			return new ResponseEntity<Funcionario>(func, HttpStatus.OK);
 		}
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/insertOrUpdadeFuncionario", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Funcionario> insertFuncionario(@RequestBody Funcionario funcionario) {
 		try {
-			if(!funcionario.getDsCargo().equals("") && !funcionario.getNmPessoa().equals("") && 
-					!funcionario.getNrCpf().equals("") && !funcionario.getNrTelefone().equals("")){
-				//passa o idendereco por parametro do front-end
+			if (!funcionario.getDsCargo().equals("") && !funcionario.getNmPessoa().equals("")
+					&& !funcionario.getNrCpf().equals("") && !funcionario.getNrTelefone().equals("")) {
+				// passa o idendereco por parametro do front-end
 				Optional<Endereco> end = er.findById(Integer.parseInt(funcionario.getIdEndereco()));
 				Pessoa p = new Pessoa();
 				p.setEndereco(end.get());
@@ -112,18 +109,15 @@ public class FuncionarioResources {
 				func.setSenha(funcionario.getSenha());
 				fr.save(func);
 				fr.flush();
-				
-			}else {
+
+			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
+
 		return null;
 	}
-	
-	
-	
+
 }

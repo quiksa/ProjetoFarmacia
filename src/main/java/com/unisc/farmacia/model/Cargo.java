@@ -10,6 +10,9 @@ public class Cargo {
 	@Column(name="idcargo")
 	private int idCargo;
 	
+	@Column (name="nmcargo")
+	private String nmCargo;
+	
 	@Column (name="dscargo")
 	private String dsCargo;
 	
@@ -25,4 +28,11 @@ public class Cargo {
 	public void setDsCargo(String dsCargo) {
 		this.dsCargo = dsCargo;
 	}
+	public String getNmCargo() {
+		return nmCargo;
+	}
+	public void setNmCargo(String nmCargo) {
+		this.nmCargo = nmCargo;
+	}
+	
 }
