@@ -37,7 +37,6 @@ public class UnidadeResources {
 	@GetMapping(produces = "application/json")
 	public @ResponseBody Iterable<Unidade> listaUnidades() {
 		Iterable<Unidade> listaUnidades = ur.findAll();
-
 		return listaUnidades;
 	}
 
@@ -52,25 +51,26 @@ public class UnidadeResources {
 	public ResponseEntity<Unidade> retornaUnidade(@RequestBody Unidade unidade) {
 		try {
 			Unidade unid = new Unidade();
-			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("") && !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
+			if (!unidade.getCnpj().equals("") && !unidade.getNmBairro().equals("")
+					&& !unidade.getDsComplemento().equals("") && !unidade.getNmRua().equals("")) {
 				Optional<Cidade> un = cr.findById(Integer.parseInt(unidade.getIdCidade()));
 				Endereco end = new Endereco();
 				end.setCidade(un.get());
 				end.setBairro(unidade.getNmBairro());
 				end.setDsComplemento(unidade.getDsComplemento());
 				end.setNmRua(unidade.getNmRua());
-				if(unidade.getIdendereco() != null) {
+				if (unidade.getIdendereco() != null) {
 					end.setIdEndereco(Integer.parseInt(unidade.getIdendereco()));
 				}
 				er.save(end);
 				er.flush();
-				
+
 				unid.setEndereco(end);
 				unid.setCnpj(unidade.getCnpj());
 				unid.setDsUnidade(unidade.getDsUnidade());
 				unid.setNmUnidade(unidade.getNmUnidade());
 				unid.setNmRduzido(unidade.getNmRduzido());
-				if(!String.valueOf(unidade.getIdUnidade()).equals("0")) {
+				if (!String.valueOf(unidade.getIdUnidade()).equals("0")) {
 					unid.setIdUnidade(unidade.getIdUnidade());
 				}
 				ur.save(unid);
@@ -84,7 +84,8 @@ public class UnidadeResources {
 	}
 
 	@RequestMapping(value = "/deletaUnidade", method = RequestMethod.GET)
-	public ResponseEntity<Unidade> delUnidade(@RequestParam(value = "idunidade", required = true, name = "idunidade") int idunidade) {
+	public ResponseEntity<Unidade> delUnidade(
+			@RequestParam(value = "idunidade", required = true, name = "idunidade") int idunidade) {
 		try {
 			Optional<Unidade> unidade = ur.findById(idunidade);
 			if (unidade.isPresent()) {
@@ -96,7 +97,6 @@ public class UnidadeResources {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
 	}
 
 	@DeleteMapping

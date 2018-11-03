@@ -33,7 +33,6 @@ public class Endereco {
 	@Column (name="bairro")
 	private String bairro;
 	
-	//@Transient
 	@ManyToOne
 	@JoinColumn(name="idcidade")
 	private Cidade cidade;

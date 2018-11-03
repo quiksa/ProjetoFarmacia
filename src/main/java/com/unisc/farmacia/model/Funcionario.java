@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -43,6 +44,55 @@ public class Funcionario {
 	@OneToOne
 	@JoinColumn(name="idcargo")
 	private Cargo cargo;
+	
+	//Transient da tabela cargo------------------------
+	@Transient
+	private String dsCargo;
+	
+	public String getDsCargo() {
+		return dsCargo;
+	}
+	public void setDsCargo(String dsCargo) {
+		this.dsCargo = dsCargo;
+	}
+	//Transient da tabela pessoa-----------------------
+	@Transient
+	private String nmPessoa;
+	
+	@Transient
+	private String nrCpf;
+	
+	@Transient
+	private String nrTelefone;
+	
+	@Transient
+	private String idEndereco;
+	
+	public String getNmPessoa() {
+		return nmPessoa;
+	}
+	public void setNmPessoa(String nmPessoa) {
+		this.nmPessoa = nmPessoa;
+	}
+	public String getNrCpf() {
+		return nrCpf;
+	}
+	public void setNrCpf(String nrCpf) {
+		this.nrCpf = nrCpf;
+	}
+	public String getNrTelefone() {
+		return nrTelefone;
+	}
+	public void setNrTelefone(String nrTelefone) {
+		this.nrTelefone = nrTelefone;
+	}	
+	public String getIdEndereco() {
+		return idEndereco;
+	}
+	public void setIdEndereco(String idEndereco) {
+		this.idEndereco = idEndereco;
+	}
+	//----------------------------------------------------------------
 	public int getIdFuncionario() {
 		return idFuncionario;
 	}
