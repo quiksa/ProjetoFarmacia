@@ -1,5 +1,6 @@
 package com.unisc.farmacia.resources;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -18,16 +19,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unisc.farmacia.model.Cargo;
+import com.unisc.farmacia.model.Cidade;
 import com.unisc.farmacia.model.Endereco;
 import com.unisc.farmacia.model.Funcionario;
 import com.unisc.farmacia.model.Pessoa;
-
+import com.unisc.farmacia.model.Unidade;
 import com.unisc.farmacia.repository.CargoRepository;
+import com.unisc.farmacia.repository.CidadeRepository;
 import com.unisc.farmacia.repository.EnderecoRepository;
 import com.unisc.farmacia.repository.FuncionarioRepository;
 import com.unisc.farmacia.repository.PessoaRepository;
+import com.unisc.farmacia.repository.UnidadeRepository;
 
 @RestController
+@RequestMapping("/funcionario")
 public class FuncionarioResources {
 
 	@Autowired
@@ -37,12 +42,15 @@ public class FuncionarioResources {
 	@Autowired
 	private EnderecoRepository er;
 	@Autowired
+	private CidadeRepository cidr;
+	@Autowired
 	private CargoRepository cr;
+	@Autowired
+	private UnidadeRepository ur;
 
-	@GetMapping("/funcionario")
+	@GetMapping("/load")
 	public @ResponseBody Iterable<Funcionario> listaFuncionarios() {
 		Iterable<Funcionario> listaFuncionarios = fr.findAll();
-
 		return listaFuncionarios;
 	}
 
@@ -57,8 +65,6 @@ public class FuncionarioResources {
 		return funcionario;
 	}
 
-	// Por item único
-
 	@GetMapping("/funcionario/id={id}")
 	public @ResponseBody Optional<Funcionario> retornaFuncionarioPorId(@PathVariable Integer id) {
 		Optional<Funcionario> funcionario = fr.findById(id);
@@ -72,12 +78,13 @@ public class FuncionarioResources {
 	}
 
 	// http://localhost:8080/funcionario/signin?login=Ascostofes&senha=ascostofes
-	@RequestMapping(value = "/funcionario/signin", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/signin", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Funcionario> retornaFuncionario(@RequestBody Funcionario f) {
 		String senha = f.getSenha();
 		String login = f.getLogin();
+		String idunidade = f.getIdunidade();
 		Funcionario func = new Funcionario();
-		func = fr.listaFuncionario(login, senha);
+		func = fr.listaFuncionario(login, senha, Integer.parseInt(idunidade));
 		if (func.equals(null)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
@@ -89,34 +96,57 @@ public class FuncionarioResources {
 	@RequestMapping(value = "/insertOrUpdadeFuncionario", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Funcionario> insertFuncionario(@RequestBody Funcionario funcionario) {
 		try {
-			if (!funcionario.getDsCargo().equals("") && !funcionario.getNmPessoa().equals("")
-					&& !funcionario.getNrCpf().equals("") && !funcionario.getNrTelefone().equals("")) {
-				// passa o idendereco por parametro do front-end
-				Optional<Endereco> end = er.findById(Integer.parseInt(funcionario.getIdEndereco()));
-				Pessoa p = new Pessoa();
-				p.setEndereco(end.get());
-				p.setNmPessoa(funcionario.getNmPessoa());
-				p.setNrcpf(funcionario.getNrCpf());
-				p.setNrtelefone(funcionario.getNrTelefone());
-				pr.save(p);
-				pr.flush();
-				Cargo c = new Cargo();
-				c.setDsCargo(funcionario.getDsCargo());
-				cr.save(c);
-				cr.flush();
-				Funcionario func = new Funcionario();
-				func.setLogin(funcionario.getLogin());
-				func.setSenha(funcionario.getSenha());
-				fr.save(func);
-				fr.flush();
+			if (!funcionario.getNmPessoa().equals("") && !funcionario.getNrCpf().equals("")
+					&& !funcionario.getBairro().equals("") && !funcionario.getIdcargo().equals("")
+					&& !funcionario.getDscomplemento().equals("") && !funcionario.getDtnascimento().equals("")
+					&& !funcionario.getEmail().equals("") && !funcionario.getIdcidade().equals("")
+					&& !funcionario.getIdunidade().equals("") && !funcionario.getLogin().equals("")
+					&& !funcionario.getNmrua().equals("") && !funcionario.getSenha().equals("")
+					&& !funcionario.getSgsexo().equals("") && !funcionario.getNrTelefone().equals("")) {
+				Optional<Cidade> cid = cidr.findById(Integer.parseInt(funcionario.getIdcidade()));
+				if (cid.isPresent()) {
+					Endereco end = new Endereco();
+					end.setBairro(funcionario.getBairro());
+					end.setCidade(cid.get());
+					end.setDsComplemento(funcionario.getDscomplemento());
+					if (funcionario.getIdEndereco() != null) {
+						end.setIdEndereco(Integer.parseInt(funcionario.getIdEndereco()));
+					}
+					end.setNmRua(funcionario.getNmrua());
+					er.save(end);
+					er.flush();
+					Pessoa p = new Pessoa();
+					if (funcionario.getIdpessoa() != null) {
+						p.setIdPessoa(Integer.parseInt(funcionario.getIdpessoa()));
+					}
+					p.setEndereco(end);
+					p.setNmPessoa(funcionario.getNmPessoa());
+					p.setNrcpf(funcionario.getNrCpf());
+					p.setNrtelefone(funcionario.getNrTelefone());
+					p.setSgsexo(funcionario.getSgsexo());
+					p.setEmail(funcionario.getEmail());
+					p.setDtnascimento(LocalDate.parse(funcionario.getDtnascimento()));
+					pr.save(p);
+					pr.flush();
+					Optional<Unidade> unid = ur.findById(Integer.parseInt(funcionario.getIdunidade()));
+					Optional<Cargo> cargo = cr.findById(Integer.parseInt(funcionario.getIdcargo()));
+					if (unid.isPresent() && cargo.isPresent()) {
+						funcionario.setPessoa(p);
+						funcionario.setUnidade(unid.get());
+						funcionario.setCargo(cargo.get());
+						fr.save(funcionario);
+						return new ResponseEntity<Funcionario>(funcionario, HttpStatus.OK);
+					} else {
+						return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+					}
 
-			} else {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
 		return null;
 	}
 

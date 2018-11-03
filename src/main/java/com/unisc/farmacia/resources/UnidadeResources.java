@@ -64,7 +64,6 @@ public class UnidadeResources {
 				}
 				er.save(end);
 				er.flush();
-
 				unid.setEndereco(end);
 				unid.setCnpj(unidade.getCnpj());
 				unid.setDsUnidade(unidade.getDsUnidade());
