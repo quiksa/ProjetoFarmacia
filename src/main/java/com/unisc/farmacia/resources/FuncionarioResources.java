@@ -20,7 +20,6 @@ import com.unisc.farmacia.model.Cargo;
 import com.unisc.farmacia.model.Endereco;
 import com.unisc.farmacia.model.Funcionario;
 import com.unisc.farmacia.model.Pessoa;
-import com.unisc.farmacia.model.Unidade;
 import com.unisc.farmacia.repository.CargoRepository;
 import com.unisc.farmacia.repository.EnderecoRepository;
 import com.unisc.farmacia.repository.FuncionarioRepository;
