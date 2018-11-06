@@ -23,63 +23,16 @@ public class Estoque {
 	@JoinColumn(name="idunidade")
 	private Unidade unidade;
 	
-	
-	/**************************
-	 * TRANSIENTS DE UNIDADE***
-	 *************************/
-	
 	@Transient
-	private String dsUnidade;
-	
-	@Transient
-	private String nmUnidade;
-	
-	@Transient
-	private String nmReduzido;
-	
-	@Transient
-	private String cnpj;
-	
-	@Transient
-	private String idEndereco;
+	private String TransIdUnidade;
 	
 	
-	
-	
-	public String getDsUnidade() {
-		return dsUnidade;
+	public String getTransIdUnidade() {
+		return TransIdUnidade;
 	}
-	public void setDsUnidade(String dsUnidade) {
-		this.dsUnidade = dsUnidade;
+	public void setTransIdUnidade(String transIdUnidade) {
+		TransIdUnidade = transIdUnidade;
 	}
-	public String getNmUnidade() {
-		return nmUnidade;
-	}
-	public void setNmUnidade(String nmUnidade) {
-		this.nmUnidade = nmUnidade;
-	}
-	public String getNmReduzido() {
-		return nmReduzido;
-	}
-	public void setNmReduzido(String nmReduzido) {
-		this.nmReduzido = nmReduzido;
-	}
-	public String getCnpj() {
-		return cnpj;
-	}
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	public String getIdEndereco() {
-		return idEndereco;
-	}
-	public void setIdEndereco(String idEndereco) {
-		this.idEndereco = idEndereco;
-	}
-	
-	//-----------------------------------------------------//
-	
-	
 	public int getIdEstoque() {
 		return idEstoque;
 	}

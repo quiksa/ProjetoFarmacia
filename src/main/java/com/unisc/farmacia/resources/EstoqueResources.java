@@ -30,57 +30,46 @@ public class EstoqueResources {
 	@Autowired
 	private EstoqueRepository er;
 	@Autowired
-	private EnderecoRepository ery;
-	@Autowired
 	private UnidadeRepository ur;
-	
+
 	@GetMapping(produces="application/json")
 	public @ResponseBody Iterable<Estoque> listaEstoques() {
 		Iterable<Estoque> listaEstoques = er.findAll();
-		
+
 		return listaEstoques;
 	}
-	
+
 	@PostMapping()
 	public Estoque insereEstoque(@RequestBody Estoque estoque) {
 		return er.save(estoque);
 	}
-	
+
 	@DeleteMapping
 	public Estoque deletaEstoque(@RequestBody Estoque estoque) {
 		er.delete(estoque);
 		return estoque;
 	}
-	
-	
+
+
 	@Transactional
-	@RequestMapping(value = "/insertOrUpdadeEstoque", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/insertEstoque", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Estoque> retornaEstoque(@RequestBody Estoque estoque) {
 		try {
-			Estoque est = new Estoque();
-			if (!estoque.getCnpj().equals("") && !estoque.getDsUnidade().equals("") && !estoque.getNmReduzido().equals("") &&
-				!estoque.getNmUnidade().equals("") && !estoque.getCnpj().equals("") && !estoque.getIdEndereco().equals("") &&
-				!estoque.getIdEndereco().equals("")) {
-				Optional<Endereco> en = ery.findById(Integer.parseInt(estoque.getIdEndereco()));
-				Unidade un = new Unidade();
-				un.setCnpj(estoque.getCnpj());
-				un.setDsUnidade(estoque.getDsUnidade());
-				un.setNmRduzido(estoque.getNmReduzido());
-				un.setNmUnidade(estoque.getNmUnidade());
-				if(estoque.getIdEndereco()!=null) {
-					un.setIdendereco(estoque.getIdEndereco());
+			if(!estoque.getTransIdUnidade().equals("")) {
+				Optional<Unidade> ou = ur.findById(Integer.parseInt(estoque.getTransIdUnidade()));
+				if(ou.isPresent()) {
+					Estoque e = new Estoque();
+					e.setUnidade(ou.get());
+					er.save(e);
+				}else {
+					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				}
-				ur.save(un);
-				ur.flush();
-				est.setUnidade(un);
-				er.save(est);
-				er.flush();
-			} else {
+			}else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<>(est, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		return new ResponseEntity<>(estoque, HttpStatus.OK);
 	}
 }
