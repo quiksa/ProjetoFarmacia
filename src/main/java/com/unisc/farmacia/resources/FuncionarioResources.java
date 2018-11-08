@@ -96,12 +96,12 @@ public class FuncionarioResources {
 	@RequestMapping(value = "/insertOrUpdadeFuncionario", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Funcionario> insertFuncionario(@RequestBody Funcionario funcionario) {
 		try {
-			if (!funcionario.getNmPessoa().equals("") && !funcionario.getNrCpf().equals("")
-					&& !funcionario.getBairro().equals("") && !funcionario.getIdcargo().equals("")
-					&& !funcionario.getDscomplemento().equals("") && !funcionario.getDtnascimento().equals("")
-					&& !funcionario.getEmail().equals("") && !funcionario.getIdcidade().equals("")
-					&& !funcionario.getIdunidade().equals("") && !funcionario.getLogin().equals("")
-					&& !funcionario.getNmrua().equals("") && !funcionario.getSenha().equals("")
+			if (!funcionario.getNmPessoa().equals("") && !funcionario.getBairro().equals("")
+					&& !funcionario.getIdcargo().equals("") && !funcionario.getDscomplemento().equals("")
+					&& !funcionario.getDtnascimento().equals("") && !funcionario.getEmail().equals("")
+					&& !funcionario.getIdcidade().equals("") && !funcionario.getIdunidade().equals("")
+					&& !funcionario.getLogin().equals("") && !funcionario.getNmrua().equals("")
+					&& !funcionario.getSenha().equals("") && !funcionario.getNrcpf().equals("")
 					&& !funcionario.getSgsexo().equals("") && !funcionario.getNrTelefone().equals("")) {
 				Optional<Cidade> cid = cidr.findById(Integer.parseInt(funcionario.getIdcidade()));
 				if (cid.isPresent()) {
@@ -121,7 +121,6 @@ public class FuncionarioResources {
 					}
 					p.setEndereco(end);
 					p.setNmPessoa(funcionario.getNmPessoa());
-					p.setNrcpf(funcionario.getNrCpf());
 					p.setNrtelefone(funcionario.getNrTelefone());
 					p.setSgsexo(funcionario.getSgsexo());
 					p.setEmail(funcionario.getEmail());

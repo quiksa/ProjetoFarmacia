@@ -19,17 +19,11 @@ public class FornecedorResources {
 	@Autowired
 	private FornecedorRepository fr;
 
-	@GetMapping(produces = "application/json")
+	@GetMapping("/load")
 	public @ResponseBody Iterable<Fornecedor> listaFornecedores() {
 		Iterable<Fornecedor> listaFornecedores = fr.findAll();
-
 		return listaFornecedores;
 	}
-	/*
-	 * public @ResponseBody Optional<Fornecedor> exibeFornecedor(int id){
-	 * Optional<Fornecedor> Fornecedor = fr.findById(id); return Fornecedor; }
-	 */
-	
 
 	@PostMapping()
 	public Fornecedor insereFornecedor(@RequestBody Fornecedor fornecedor) {

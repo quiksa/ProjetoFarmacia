@@ -37,14 +37,6 @@ public class Pessoa {
 	@Cascade(CascadeType.ALL)
 	private Endereco endereco;
 
-	public String getNrcpf() {
-		return nrcpf;
-	}
-
-	public void setNrcpf(String nrcpf) {
-		this.nrcpf = nrcpf;
-	}
-
 	public String getNrtelefone() {
 		return nrtelefone;
 	}
@@ -52,9 +44,6 @@ public class Pessoa {
 	public void setNrtelefone(String nrtelefone) {
 		this.nrtelefone = nrtelefone;
 	}
-
-	@Column(name = "nrcpf")
-	private String nrcpf;
 
 	@Column(name = "nrtelefone")
 	private String nrtelefone;
