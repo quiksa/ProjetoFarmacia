@@ -27,6 +27,9 @@ public class Fornecedor {
 	@Column(name="cnpj")
 	private String cnpj;
 	
+	@Column(name="dsfornecedor")
+	private String dsFornecedor;
+	
 	@OneToOne
 	@JoinColumn(name="idendereco")
 	private Endereco endereco;
@@ -35,6 +38,13 @@ public class Fornecedor {
 	@JsonManagedReference
 	private List <Mercadoria> mercadorias = new ArrayList<Mercadoria>();
 	
+	
+	public String getDsFornecedor() {
+		return dsFornecedor;
+	}
+	public void setDsFornecedor(String dsFornecedor) {
+		this.dsFornecedor = dsFornecedor;
+	}
 	public List<Mercadoria> getMercadorias() {
 		return mercadorias;
 	}
