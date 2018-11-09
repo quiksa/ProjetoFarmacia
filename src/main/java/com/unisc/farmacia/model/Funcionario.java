@@ -32,6 +32,9 @@ public class Funcionario {
 	@Column(name = "senha")
 	private String senha;
 
+	@Column(name = "nrcpf")
+	private String nrcpf;
+
 	@ManyToOne
 	@JoinColumn(name = "idunidade")
 	private Unidade unidade;
@@ -45,9 +48,6 @@ public class Funcionario {
 
 	@Transient
 	private String nmPessoa;
-
-	@Transient
-	private String nrCpf;
 
 	@Transient
 	private String idcargo;
@@ -91,14 +91,6 @@ public class Funcionario {
 
 	public void setNmPessoa(String nmPessoa) {
 		this.nmPessoa = nmPessoa;
-	}
-
-	public String getNrCpf() {
-		return nrCpf;
-	}
-
-	public void setNrCpf(String nrCpf) {
-		this.nrCpf = nrCpf;
 	}
 
 	public String getNrTelefone() {
@@ -251,6 +243,14 @@ public class Funcionario {
 
 	public void setSgsexo(String sgsexo) {
 		this.sgsexo = sgsexo;
+	}
+
+	public String getNrcpf() {
+		return nrcpf;
+	}
+
+	public void setNrcpf(String nrcpf) {
+		this.nrcpf = nrcpf;
 	}
 
 }

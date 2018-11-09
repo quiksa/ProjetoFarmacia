@@ -22,6 +22,9 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCliente;
 
+	@Column(name = "nrcpf")
+	private String nrcpf;
+
 	@OneToOne
 	@JoinColumn(name = "idpessoa")
 	@Cascade(CascadeType.ALL)
@@ -58,9 +61,6 @@ public class Cliente {
 	private String idpessoa;
 
 	@Transient
-	private String nrCpf;
-
-	@Transient
 	private String nrTelefone;
 
 	public String getIdEndereco() {
@@ -77,14 +77,6 @@ public class Cliente {
 
 	public void setNmPessoa(String nmPessoa) {
 		this.nmPessoa = nmPessoa;
-	}
-
-	public String getNrCpf() {
-		return nrCpf;
-	}
-
-	public void setNrCpf(String nrCpf) {
-		this.nrCpf = nrCpf;
 	}
 
 	public String getNrTelefone() {
@@ -173,6 +165,14 @@ public class Cliente {
 
 	public void setSgsexo(String sgsexo) {
 		this.sgsexo = sgsexo;
+	}
+
+	public String getNrcpf() {
+		return nrcpf;
+	}
+
+	public void setNrcpf(String nrcpf) {
+		this.nrcpf = nrcpf;
 	}
 
 }

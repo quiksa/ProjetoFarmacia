@@ -87,7 +87,7 @@ public class ClienteResources {
 	@RequestMapping(value = "/insertOrUpdadeCliente", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Cliente> retornaCliente(@RequestBody Cliente cliente) {
 		try {
-			if (!cliente.getNmPessoa().equals("") && !cliente.getNrCpf().equals("")
+			if (!cliente.getNmPessoa().equals("") && !cliente.getNrcpf().equals("")
 					&& !cliente.getNrTelefone().equals("") && !cliente.getBairro().equals("")
 					&& !cliente.getDscomplemento().equals("") && !cliente.getDtnascimento().equals("")
 					&& !cliente.getEmail().equals("") && !cliente.getNmPessoa().equals("")
@@ -111,7 +111,6 @@ public class ClienteResources {
 					}
 					p.setEndereco(end);
 					p.setNmPessoa(cliente.getNmPessoa());
-					p.setNrcpf(cliente.getNrCpf());
 					p.setNrtelefone(cliente.getNrTelefone());
 					p.setSgsexo(cliente.getSgsexo());
 					p.setEmail(cliente.getEmail());

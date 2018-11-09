@@ -16,25 +16,24 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="fornecedor")
+@Table(name = "fornecedor")
 public class Fornecedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idfornecedor")
+	@Column(name = "idfornecedor")
 	private int idFornecedor;
-	
-	@Column(name="cnpj")
+
+	@Column(name = "cnpj")
 	private String cnpj;
-	
+
 	@Column(name="dsfornecedor")
 	private String dsFornecedor;
-	
-	@OneToOne
-	@JoinColumn(name="idendereco")
+		@OneToOne
+	@JoinColumn(name = "idendereco")
 	private Endereco endereco;
-	
-	@OneToMany(mappedBy="fornecedor",orphanRemoval = true)
+
+	@OneToMany(mappedBy = "fornecedor", orphanRemoval = true)
 	@JsonManagedReference
 	private List <Mercadoria> mercadorias = new ArrayList<Mercadoria>();
 	
@@ -45,21 +44,27 @@ public class Fornecedor {
 	public void setDsFornecedor(String dsFornecedor) {
 		this.dsFornecedor = dsFornecedor;
 	}
+
 	public List<Mercadoria> getMercadorias() {
 		return mercadorias;
 	}
+
 	public void setMercadorias(List<Mercadoria> mercadorias) {
 		this.mercadorias = mercadorias;
 	}
+
 	public int getIdFornecedor() {
 		return idFornecedor;
 	}
+
 	public void setIdFornecedor(int idFornecedor) {
 		this.idFornecedor = idFornecedor;
 	}
+
 	public String getCnpj() {
 		return cnpj;
 	}
+
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
@@ -67,6 +72,7 @@ public class Fornecedor {
 	public Endereco getEndereco() {
 		return endereco;
 	}
+
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
