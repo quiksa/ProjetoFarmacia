@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -27,13 +28,34 @@ public class Fornecedor {
 	@Column(name = "cnpj")
 	private String cnpj;
 
+	@Column(name="dsfornecedor")
+	private String dsFornecedor;
+	@OneToOne
+	
+	@JoinColumn(name = "idpessoa")
+	private Pessoa pessoa;
+
 	@OneToOne
 	@JoinColumn(name = "idendereco")
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "fornecedor", orphanRemoval = true)
 	@JsonManagedReference
-	private List<Mercadoria> mercadorias = new ArrayList<Mercadoria>();
+	private List <Mercadoria> mercadorias = new ArrayList<Mercadoria>();
+	
+	
+	public String getDsFornecedor() {
+		return dsFornecedor;
+	}
+	public void setDsFornecedor(String dsFornecedor) {
+		this.dsFornecedor = dsFornecedor;
+	}
+
+	@Transient
+	private String idcidade;
+
+	@Transient
+	private String nmrua;
 
 	public List<Mercadoria> getMercadorias() {
 		return mercadorias;
@@ -66,4 +88,21 @@ public class Fornecedor {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public String getIdcidade() {
+		return idcidade;
+	}
+
+	public String getNmrua() {
+		return nmrua;
+	}
+
 }

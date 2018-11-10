@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -43,6 +44,56 @@ public class Mercadoria {
 	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
 	
+	// Transient de Categoria
+	
+	@Transient
+	private String tDsCategoria;
+	
+	@Transient
+	private String tcnpjFornec;
+	
+	@Transient
+	private String tDsFornecedor;
+	
+	@Transient
+	private String tIdEnderecoFornecedor;
+	
+	public String gettDsCategoria() {
+		return tDsCategoria;
+	}
+	public void settDsCategoria(String tDsCategoria) {
+		this.tDsCategoria = tDsCategoria;
+	}
+	public String getTcnpjFornec() {
+		return tcnpjFornec;
+	}
+	public void setTcnpjFornec(String tcnpjFornec) {
+		this.tcnpjFornec = tcnpjFornec;
+	}
+	public String gettDsFornecedor() {
+		return tDsFornecedor;
+	}
+	public void settDsFornecedor(String tDsFornecedor) {
+		this.tDsFornecedor = tDsFornecedor;
+	}
+	public String gettIdEnderecoFornecedor() {
+		return tIdEnderecoFornecedor;
+	}
+	public void settIdEnderecoFornecedor(String tIdEnderecoFornecedor) {
+		this.tIdEnderecoFornecedor = tIdEnderecoFornecedor;
+	}	
+	
+	
+	
+	//--------------------------------
+	
+	
+	public List<HistoricoPreco> getHistoricoDePrecos() {
+		return historicoDePrecos;
+	}
+	public void setHistoricoDePrecos(List<HistoricoPreco> historicoDePrecos) {
+		this.historicoDePrecos = historicoDePrecos;
+	}
 	@OneToMany(mappedBy="mercadoria",orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
 	@JsonManagedReference
