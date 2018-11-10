@@ -66,7 +66,6 @@ public class MercadoriaResources {
 				if(en.isPresent()) {
 					Fornecedor f = new Fornecedor();
 					f.setCnpj(mercadoria.getTcnpjFornec());
-					f.setEndereco(en.get());
 					f.setDsFornecedor(mercadoria.gettDsFornecedor());
 					fr.save(f);
 					fr.flush();

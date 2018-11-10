@@ -14,6 +14,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -28,34 +31,44 @@ public class Fornecedor {
 	@Column(name = "cnpj")
 	private String cnpj;
 
-	@Column(name="dsfornecedor")
+	@Column(name = "dsfornecedor")
 	private String dsFornecedor;
 
 	@OneToOne
 	@JoinColumn(name = "idpessoa")
+	@Cascade(CascadeType.ALL)
 	private Pessoa pessoa;
-
-	@OneToOne
-	@JoinColumn(name = "idendereco")
-	private Endereco endereco;
 
 	@OneToMany(mappedBy = "fornecedor", orphanRemoval = true)
 	@JsonManagedReference
-	private List <Mercadoria> mercadorias = new ArrayList<Mercadoria>();
-	
-	
-	public String getDsFornecedor() {
-		return dsFornecedor;
-	}
-	public void setDsFornecedor(String dsFornecedor) {
-		this.dsFornecedor = dsFornecedor;
-	}
+	private List<Mercadoria> mercadorias = new ArrayList<Mercadoria>();
 
 	@Transient
 	private String idcidade;
 
 	@Transient
 	private String nmrua;
+
+	@Transient
+	private String bairro;
+
+	@Transient
+	private String dscomplemento;
+
+	@Transient
+	private String nmPessoa;
+
+	@Transient
+	private String email;
+
+	@Transient
+	private String idendereco;
+
+	@Transient
+	private String idpessoa;
+
+	@Transient
+	private String nrtelefone;
 
 	public List<Mercadoria> getMercadorias() {
 		return mercadorias;
@@ -81,14 +94,6 @@ public class Fornecedor {
 		this.cnpj = cnpj;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -103,6 +108,42 @@ public class Fornecedor {
 
 	public String getNmrua() {
 		return nmrua;
+	}
+
+	public String getDsFornecedor() {
+		return dsFornecedor;
+	}
+
+	public void setDsFornecedor(String dsFornecedor) {
+		this.dsFornecedor = dsFornecedor;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public String getDscomplemento() {
+		return dscomplemento;
+	}
+
+	public String getNmPessoa() {
+		return nmPessoa;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getNrtelefone() {
+		return nrtelefone;
+	}
+
+	public String getIdendereco() {
+		return idendereco;
+	}
+
+	public String getIdpessoa() {
+		return idpessoa;
 	}
 
 }

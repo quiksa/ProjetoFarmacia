@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unisc.farmacia.model.Cidade;
+import com.unisc.farmacia.model.Cliente;
 import com.unisc.farmacia.model.Endereco;
 import com.unisc.farmacia.model.Fornecedor;
 import com.unisc.farmacia.model.Pessoa;
@@ -38,7 +40,7 @@ public class FornecedorResources {
 	@Autowired
 	private PessoaRepository pr;
 
-	@GetMapping("/load")
+	@GetMapping()
 	public @ResponseBody Iterable<Fornecedor> listaFornecedores() {
 		Iterable<Fornecedor> listaFornecedores = fr.findAll();
 		return listaFornecedores;
@@ -59,31 +61,33 @@ public class FornecedorResources {
 	@RequestMapping(value = "/insertOrUpdadeFornecedor", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Fornecedor> insertFornecedor(@RequestBody Fornecedor fornecedor) {
 		try {
-			if (!fornecedor.getPessoa().getNmPessoa().equals("") && !fornecedor.getEndereco().getBairro().equals("")
-					&& !fornecedor.getEndereco().getDsComplemento().equals("")
-					&& !fornecedor.getPessoa().getEmail().equals("") && !fornecedor.getIdcidade().equals("")
-					&& !fornecedor.getNmrua().equals("") && !fornecedor.getCnpj().equals("")
-					&& !fornecedor.getPessoa().getNrtelefone().equals("")) {
+			if (!fornecedor.getNmPessoa().equals("") && !fornecedor.getBairro().equals("")
+					&& !fornecedor.getDscomplemento().equals("") && !fornecedor.getEmail().equals("")
+					&& !fornecedor.getIdcidade().equals("") && !fornecedor.getNmrua().equals("")
+					&& !fornecedor.getCnpj().equals("") && !fornecedor.getNrtelefone().equals("")) {
 				Optional<Cidade> cid = cidr.findById(Integer.parseInt(fornecedor.getIdcidade()));
 				if (cid.isPresent()) {
 					Endereco end = new Endereco();
-					end.setBairro(fornecedor.getEndereco().getBairro());
+					end.setBairro(fornecedor.getBairro());
 					end.setCidade(cid.get());
-					end.setDsComplemento(fornecedor.getEndereco().getDsComplemento());
-					end.setIdEndereco(fornecedor.getEndereco().getIdEndereco());
+					end.setDsComplemento(fornecedor.getDscomplemento());
+					if (fornecedor.getIdendereco() != null) {
+						end.setIdEndereco(Integer.parseInt(fornecedor.getIdendereco()));
+					}
 					end.setNmRua(fornecedor.getNmrua());
 					er.save(end);
 					er.flush();
 					Pessoa p = new Pessoa();
-					p.setIdPessoa(fornecedor.getPessoa().getIdPessoa());
+					if (fornecedor.getIdpessoa() != null) {
+						p.setIdPessoa(Integer.parseInt(fornecedor.getIdpessoa()));
+					}
 					p.setEndereco(end);
-					p.setNmPessoa(fornecedor.getPessoa().getNmPessoa());
-					p.setNrtelefone(fornecedor.getPessoa().getNrtelefone());
-					p.setEmail(fornecedor.getPessoa().getEmail());
+					p.setNmPessoa(fornecedor.getNmPessoa());
+					p.setNrtelefone(fornecedor.getNrtelefone());
+					p.setEmail(fornecedor.getEmail());
 					pr.save(p);
 					pr.flush();
 					fornecedor.setPessoa(p);
-					fornecedor.setEndereco(end);
 					fr.save(fornecedor);
 					return new ResponseEntity<Fornecedor>(fornecedor, HttpStatus.OK);
 				} else {
@@ -94,6 +98,24 @@ public class FornecedorResources {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return null;
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/deleteFornecedor", method = RequestMethod.GET)
+	public ResponseEntity<Fornecedor> delfornecedor(
+			@RequestParam(value = "idFornecedor", required = true, name = "idFornecedor") int idFornecedor) {
+		try {
+			Optional<Fornecedor> fornecedor = fr.findById(idFornecedor);
+			if (fornecedor.isPresent()) {
+				fr.delete(fornecedor.get());
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
 	}
 
 }
