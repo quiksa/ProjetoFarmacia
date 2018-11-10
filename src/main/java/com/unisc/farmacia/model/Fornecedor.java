@@ -30,8 +30,8 @@ public class Fornecedor {
 
 	@Column(name="dsfornecedor")
 	private String dsFornecedor;
+
 	@OneToOne
-	
 	@JoinColumn(name = "idpessoa")
 	private Pessoa pessoa;
 
