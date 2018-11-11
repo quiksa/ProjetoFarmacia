@@ -15,35 +15,46 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
-@Table(name="categoria")
+@Table(name = "categoria")
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column (name="idcategoria")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idcategoria")
 	private int idCategoria;
-	
-	@Column(name="dscategoria")
+
+	@Column(name = "dscategoria")
 	private String dsCategoria;
-	
-	@OneToMany(mappedBy="categoria",orphanRemoval = true)
+
+	@Column(name = "nmcategoria")
+	private String nmCategoria;
+
+	@OneToMany(mappedBy = "categoria", orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
 	private List<Mercadoria> mercadoria = new ArrayList<Mercadoria>();
-	
+
 	public int getIdCategoria() {
 		return idCategoria;
 	}
+
 	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
+
 	public String getDsCategoria() {
 		return dsCategoria;
 	}
+
 	public void setDsCategoria(String dsCategoria) {
 		this.dsCategoria = dsCategoria;
 	}
-	
-	
-	
-	
+
+	public String getNmCategoria() {
+		return nmCategoria;
+	}
+
+	public void setNmCategoria(String nmCategoria) {
+		this.nmCategoria = nmCategoria;
+	}
+
 }

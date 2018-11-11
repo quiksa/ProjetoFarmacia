@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unisc.farmacia.model.Categoria;
-import com.unisc.farmacia.model.Endereco;
 import com.unisc.farmacia.model.Fornecedor;
 import com.unisc.farmacia.model.Mercadoria;
 import com.unisc.farmacia.repository.CategoriaRepository;
-import com.unisc.farmacia.repository.EnderecoRepository;
 import com.unisc.farmacia.repository.FornecedorRepository;
 import com.unisc.farmacia.repository.MercadoriaRepository;
 
@@ -31,16 +29,13 @@ public class MercadoriaResources {
 	@Autowired
 	private MercadoriaRepository mr;
 	@Autowired
-	private EnderecoRepository er;
-	@Autowired
 	private FornecedorRepository fr;
 	@Autowired
 	private CategoriaRepository cr;
 
-	@GetMapping(produces="application/json")
+	@GetMapping("/load")
 	public @ResponseBody Iterable<Mercadoria> listaMercadorias() {
 		Iterable<Mercadoria> listaMercadorias = mr.findAll();
-
 		return listaMercadorias;
 	}
 
@@ -56,43 +51,29 @@ public class MercadoriaResources {
 	}
 
 	@Transactional
-	@RequestMapping(value = "/insertMercadoria", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<Mercadoria> retornaMercadoria(@RequestBody Mercadoria mercadoria) {	
+	@RequestMapping(value = "/insertOrUpdadeMercadoria", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<Mercadoria> retornaMercadoria(@RequestBody Mercadoria mercadoria) {
 		try {
-			if(!mercadoria.getNmMercadoria().equals("") && !mercadoria.getDsComplemento().equals("") && 
-					!mercadoria.getTcnpjFornec().equals("") && !mercadoria.gettDsCategoria().equals("") && 
-					!mercadoria.gettDsFornecedor().equals("") && !mercadoria.gettIdEnderecoFornecedor().equals("")){
-				Optional<Endereco> en = er.findById(Integer.parseInt(mercadoria.gettIdEnderecoFornecedor()));
-				if(en.isPresent()) {
-					Fornecedor f = new Fornecedor();
-					f.setCnpj(mercadoria.getTcnpjFornec());
-					f.setDsFornecedor(mercadoria.gettDsFornecedor());
-					fr.save(f);
-					fr.flush();
-					Categoria c = new Categoria();
-					c.setDsCategoria(mercadoria.gettDsCategoria());
-					cr.save(c);
-					cr.flush();
-					Mercadoria m = new Mercadoria();
-					m.setCategoria(c);
-					m.setFornecedor(f);
-					m.setDsComplemento(mercadoria.getDsComplemento());
-					m.setNmMercadoria(mercadoria.getNmMercadoria());
-					mr.save(m);
-					mr.flush();				
-				}else {
+			if (!mercadoria.getNmMercadoria().equals("") && !mercadoria.getDsComplemento().equals("")
+					&& !mercadoria.getIdcategoria().equals("") && !mercadoria.getIdfornecedor().equals("")) {
+				Optional<Fornecedor> fornecedor = fr.findById(Integer.parseInt(mercadoria.getIdfornecedor()));
+				Optional<Categoria> categoria = cr.findById(Integer.parseInt(mercadoria.getIdcategoria()));
+				if (fornecedor.isPresent() && categoria.isPresent()) {
+					mercadoria.setCategoria(categoria.get());
+					mercadoria.setFornecedor(fornecedor.get());
+					mr.save(mercadoria);
+				} else {
 					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				}
 
-			}else {
+			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			return new ResponseEntity<>(mercadoria, HttpStatus.OK);
+			return new ResponseEntity<Mercadoria>(mercadoria, HttpStatus.OK);
 
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
 
 	}
 }

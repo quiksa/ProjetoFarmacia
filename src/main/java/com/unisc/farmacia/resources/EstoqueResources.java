@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,10 +30,9 @@ public class EstoqueResources {
 	@Autowired
 	private UnidadeRepository ur;
 
-	@GetMapping(produces="application/json")
+	@GetMapping("/load")
 	public @ResponseBody Iterable<Estoque> listaEstoques() {
 		Iterable<Estoque> listaEstoques = er.findAll();
-
 		return listaEstoques;
 	}
 
@@ -47,26 +47,42 @@ public class EstoqueResources {
 		return estoque;
 	}
 
-
 	@Transactional
-	@RequestMapping(value = "/insertEstoque", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/insertOrUpdadeEstoque", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Estoque> retornaEstoque(@RequestBody Estoque estoque) {
 		try {
-			if(!estoque.getTransIdUnidade().equals("")) {
-				Optional<Unidade> ou = ur.findById(Integer.parseInt(estoque.getTransIdUnidade()));
-				if(ou.isPresent()) {
-					Estoque e = new Estoque();
-					e.setUnidade(ou.get());
-					er.save(e);
-				}else {
+			if (!estoque.getIdUnidade().equals("") && !estoque.getDsEstoque().equals("")) {
+				Optional<Unidade> ou = ur.findById(Integer.parseInt(estoque.getIdUnidade()));
+				if (ou.isPresent()) {
+					estoque.setUnidade(ou.get());
+					er.save(estoque);
+				} else {
 					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				}
-			}else {
+			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(estoque, HttpStatus.OK);
+		return new ResponseEntity<Estoque>(estoque, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/deleteEstoque", method = RequestMethod.GET)
+	public ResponseEntity<Estoque> delEstoque(
+			@RequestParam(value = "idestoque", required = true, name = "idestoque") int idestoque) {
+		try {
+			Optional<Estoque> estoque = er.findById(idestoque);
+			if (estoque.isPresent()) {
+				er.delete(estoque.get());
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+	}
+	
 }
