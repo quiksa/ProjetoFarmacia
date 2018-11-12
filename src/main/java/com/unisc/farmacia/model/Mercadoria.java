@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "mercadoria")
@@ -35,6 +37,7 @@ public class Mercadoria {
 
 	@ManyToOne
 	@JoinColumn(name = "idfornecedor")
+	@JsonBackReference
 	private Fornecedor fornecedor;
 
 	@ManyToOne
