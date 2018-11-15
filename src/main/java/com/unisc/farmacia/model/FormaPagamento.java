@@ -22,9 +22,8 @@ public class FormaPagamento {
 	@Column(name="dsformapagamento")
 	private String dsFormaPagamento;
 	
-	@OneToOne
-	@JoinColumn(name="idtipopagamento")
-	private TipoPagamento tipoPagamento;
+	@Column(name="dstipopagamento")
+	private String dsTipoPagamento;
 	
 	public int getIdFormaPagamento() {
 		return idFormaPagamento;
@@ -38,13 +37,10 @@ public class FormaPagamento {
 	public void setDsFormaPagamento(String dsFormaPagamento) {
 		this.dsFormaPagamento = dsFormaPagamento;
 	}
-	public TipoPagamento getTipoPagamento() {
-		return tipoPagamento;
+	public String getDsTipoPagamento() {
+		return dsTipoPagamento;
 	}
-	public void setTipoPagamento(TipoPagamento tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
+	public void setDsTipoPagamento(String dsTipoPagamento) {
+		this.dsTipoPagamento = dsTipoPagamento;
 	}
-	
-	
-
 }

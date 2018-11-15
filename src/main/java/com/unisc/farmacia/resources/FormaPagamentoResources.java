@@ -25,12 +25,6 @@ public class FormaPagamentoResources {
 		
 		return listaFormaPagamentos;
 	}
-	/*
-	public @ResponseBody Optional<FormaPagamento> exibeFormaPagamento(int id){
-		Optional<FormaPagamento> formaPagamento = cr.findById(id);
-		return formaPagamento;
-	}
-	*/
 	
 	@PostMapping()
 	public FormaPagamento insereFormaPagamento(@RequestBody FormaPagamento formaPagamento) {
