@@ -54,6 +54,7 @@ public class Unidade {
 	
 	@Transient
 	private String idendereco;
+	
 	//----------------------------------------------------------
 	@OneToOne
 	@Cascade(CascadeType.ALL)
