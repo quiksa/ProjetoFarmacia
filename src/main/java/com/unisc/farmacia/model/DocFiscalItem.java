@@ -27,6 +27,10 @@ public class DocFiscalItem {
 	@JsonBackReference
 	private DocFiscal docFiscal;
 	
+	@OneToOne
+	@JoinColumn(name="idmovimentomercadoria")
+	private MovimentoMercadoria movimentomercadoria;
+	
 	@Column(name="vlitem")
 	private double vlItem;
 	

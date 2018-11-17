@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unisc.farmacia.model.Categoria;
-import com.unisc.farmacia.model.Fornecedor;
 import com.unisc.farmacia.model.Mercadoria;
 import com.unisc.farmacia.repository.CategoriaRepository;
-import com.unisc.farmacia.repository.FornecedorRepository;
 import com.unisc.farmacia.repository.MercadoriaRepository;
 
 @RestController
@@ -28,8 +26,6 @@ public class MercadoriaResources {
 
 	@Autowired
 	private MercadoriaRepository mr;
-	@Autowired
-	private FornecedorRepository fr;
 	@Autowired
 	private CategoriaRepository cr;
 
@@ -54,24 +50,19 @@ public class MercadoriaResources {
 	@RequestMapping(value = "/insertOrUpdadeMercadoria", method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Mercadoria> retornaMercadoria(@RequestBody Mercadoria mercadoria) {
 		try {
-			if (!mercadoria.getNmMercadoria().equals("") && !mercadoria.getDsComplemento().equals("")
-					&& !mercadoria.getIdcategoria().equals("") && !mercadoria.getIdfornecedor().equals("")) {
-				Optional<Fornecedor> fornecedor = fr.findById(Integer.parseInt(mercadoria.getIdfornecedor()));
+			if (mercadoria.getCodBarra() > 0 && !mercadoria.getNmMercadoria().equals("")
+					&& !mercadoria.getDsComplemento().equals("") && !mercadoria.getIdcategoria().equals("")) {
 				Optional<Categoria> categoria = cr.findById(Integer.parseInt(mercadoria.getIdcategoria()));
-				if (fornecedor.isPresent() && categoria.isPresent()) {
-					mercadoria.setCategoria(categoria.get());
-					mercadoria.setFornecedor(fornecedor.get());
-					mr.save(mercadoria);
-				} else {
-					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-				}
-
+				mercadoria.setCategoria(categoria.get());
+				mr.save(mercadoria);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 			return new ResponseEntity<Mercadoria>(mercadoria, HttpStatus.OK);
 
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 

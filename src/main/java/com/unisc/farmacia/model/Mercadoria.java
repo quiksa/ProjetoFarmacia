@@ -17,9 +17,6 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
 @Entity
 @Table(name = "mercadoria")
 public class Mercadoria {
@@ -35,10 +32,11 @@ public class Mercadoria {
 	@Column(name = "dscomplemento")
 	private String dsComplemento;
 
-	@ManyToOne
-	@JoinColumn(name = "idfornecedor")
-	@JsonBackReference
-	private Fornecedor fornecedor;
+	@Column(name = "codbarras")
+	private int codBarra;
+
+	@Column(name = "vlmercadoria")
+	private float vlMercadoria;
 
 	@ManyToOne
 	@JoinColumn(name = "idcategoria")
@@ -47,9 +45,6 @@ public class Mercadoria {
 	@OneToMany(mappedBy = "mercadoria", orphanRemoval = true)
 	@Cascade(CascadeType.ALL)
 	private List<HistoricoPreco> historicoDePrecos = new ArrayList<HistoricoPreco>();
-
-	@Transient
-	private String idfornecedor;
 
 	@Transient
 	private String idcategoria;
@@ -86,14 +81,6 @@ public class Mercadoria {
 		this.dsComplemento = dsComplemento;
 	}
 
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
-
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -102,12 +89,24 @@ public class Mercadoria {
 		this.categoria = categoria;
 	}
 
-	public String getIdfornecedor() {
-		return idfornecedor;
-	}
-
 	public String getIdcategoria() {
 		return idcategoria;
+	}
+
+	public int getCodBarra() {
+		return codBarra;
+	}
+
+	public void setCodBarra(int codBarra) {
+		this.codBarra = codBarra;
+	}
+
+	public float getVlMercadoria() {
+		return vlMercadoria;
+	}
+
+	public void setVlMercadoria(float vlMercadoria) {
+		this.vlMercadoria = vlMercadoria;
 	}
 
 }

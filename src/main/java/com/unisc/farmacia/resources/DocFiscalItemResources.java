@@ -22,7 +22,6 @@ import com.unisc.farmacia.model.Cliente;
 import com.unisc.farmacia.model.DocFiscal;
 import com.unisc.farmacia.model.DocFiscalItem;
 import com.unisc.farmacia.model.FormaPagamento;
-import com.unisc.farmacia.model.Fornecedor;
 import com.unisc.farmacia.model.Funcionario;
 import com.unisc.farmacia.model.Mercadoria;
 import com.unisc.farmacia.repository.CategoriaRepository;
@@ -30,7 +29,6 @@ import com.unisc.farmacia.repository.ClienteRepository;
 import com.unisc.farmacia.repository.DocFiscalItemRepository;
 import com.unisc.farmacia.repository.DocFiscalRepository;
 import com.unisc.farmacia.repository.FormaPagamentoRepository;
-import com.unisc.farmacia.repository.FornecedorRepository;
 import com.unisc.farmacia.repository.FuncionarioRepository;
 import com.unisc.farmacia.repository.MercadoriaRepository;
 
@@ -42,9 +40,6 @@ public class DocFiscalItemResources {
 
 	@Autowired
 	private CategoriaRepository cr;
-
-	@Autowired
-	private FornecedorRepository fr;
 
 	@Autowired
 	private ClienteRepository cr2;
@@ -97,7 +92,6 @@ public class DocFiscalItemResources {
 			if(!dfi.getTransIdDocFiscal().equals("") && !dfi.getTransIdMercadoria().equals("") && vlItem!=null 
 					&& vlDesconto!=null) {
 				Optional<Categoria> cat = cr.findById(Integer.parseInt(dfi.getTransIdCategoria()));
-				Optional<Fornecedor> forn = fr.findById(Integer.parseInt(dfi.getTransIdFornecedor()));
 				Optional<Cliente> cli = cr2.findById(Integer.parseInt(dfi.getTransIdCliente()));
 				Optional<FormaPagamento> fp = fpr.findById(Integer.parseInt(dfi.getTransIdFormaPagamento()));
 				Optional<Funcionario>func= fr2.findById(Integer.parseInt(dfi.getTransIdFuncionario()));
@@ -106,7 +100,7 @@ public class DocFiscalItemResources {
 				m.setNmMercadoria(dfi.getTransNmMercadoria());
 				m.setIdMercadoria(Integer.parseInt(dfi.getTransIdMercadoria()));
 				m.setCategoria(cat.get());
-				m.setFornecedor(forn.get());
+				//m.setFornecedor(forn.get());
 				mr.save(m);
 				mr.flush();
 				DocFiscal df = new DocFiscal();
