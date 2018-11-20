@@ -1,17 +1,23 @@
 package com.unisc.farmacia.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -33,6 +39,18 @@ public class Fornecedor {
 	@JoinColumn(name = "idpessoa")
 	@Cascade(CascadeType.ALL)
 	private Pessoa pessoa;
+	
+	@OneToMany(mappedBy="fornecedor",orphanRemoval = true)
+	@JsonManagedReference
+	private List<Mercadoria> mercadorias = new ArrayList<Mercadoria>();
+	
+	public List<Mercadoria> getMercadorias() {
+		return mercadorias;
+	}
+
+	public void setMercadorias(List<Mercadoria> mercadorias) {
+		this.mercadorias = mercadorias;
+	}
 
 	@Transient
 	private String idcidade;
@@ -128,5 +146,7 @@ public class Fornecedor {
 	public String getIdpessoa() {
 		return idpessoa;
 	}
+	
+	
 
 }

@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "mercadoria")
 public class Mercadoria {
@@ -31,13 +33,30 @@ public class Mercadoria {
 
 	@Column(name = "dscomplemento")
 	private String dsComplemento;
+	
+	@ManyToOne
+	@JoinColumn(name="idfornecedor")
+	@JsonBackReference
+	private Fornecedor fornecedor;
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public void setIdcategoria(String idcategoria) {
+		this.idcategoria = idcategoria;
+	}
 
 	@Column(name = "codbarras")
-	private int codBarra;
+	private String codBarra;
 
 	@Column(name = "vlmercadoria")
 	private float vlMercadoria;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "idcategoria")
 	private Categoria categoria;
@@ -48,9 +67,20 @@ public class Mercadoria {
 
 	@Transient
 	private String idcategoria;
+	
+	@Transient
+	private String transIdFornecedor;
 
 	public List<HistoricoPreco> getHistoricoDePrecos() {
 		return historicoDePrecos;
+	}
+
+	public String getTransIdFornecedor() {
+		return transIdFornecedor;
+	}
+
+	public void setTransIdFornecedor(String transIdFornecedor) {
+		this.transIdFornecedor = transIdFornecedor;
 	}
 
 	public void setHistoricoDePrecos(List<HistoricoPreco> historicoDePrecos) {
@@ -93,11 +123,11 @@ public class Mercadoria {
 		return idcategoria;
 	}
 
-	public int getCodBarra() {
+	public String getCodBarra() {
 		return codBarra;
 	}
 
-	public void setCodBarra(int codBarra) {
+	public void setCodBarra(String codBarra) {
 		this.codBarra = codBarra;
 	}
 
