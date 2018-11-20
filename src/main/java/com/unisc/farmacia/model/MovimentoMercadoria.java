@@ -11,6 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "movimentomercadoria")
 public class MovimentoMercadoria {
@@ -40,6 +43,7 @@ public class MovimentoMercadoria {
 
 	@OneToOne
 	@JoinColumn(name = "idmovimentoestoque")
+	@Cascade(CascadeType.ALL)
 	private MovimentoEstoque movimentoestoque;
 
 	@Transient
@@ -53,6 +57,9 @@ public class MovimentoMercadoria {
 
 	@Transient
 	private String dslote;
+
+	@Transient
+	private int idmovimentoestoque;
 
 	public int getIdMovimentoMercadoria() {
 		return idMovimentoMercadoria;
@@ -124,6 +131,14 @@ public class MovimentoMercadoria {
 
 	public void setVlMovimentoMercadoria(String vlMovimentoMercadoria) {
 		this.vlMovimentoMercadoria = vlMovimentoMercadoria;
+	}
+
+	public int getIdmovimentoestoque() {
+		return idmovimentoestoque;
+	}
+
+	public void setIdmovimentoestoque(int idmovimentoestoque) {
+		this.idmovimentoestoque = idmovimentoestoque;
 	}
 
 }

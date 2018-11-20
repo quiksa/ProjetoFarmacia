@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,8 +65,10 @@ public class MovimentoMercadoriaResources {
 				me.setDsLote(movimentomercadoria.getDslote());
 				me.setQtMovimentoEstoque(movimentomercadoria.getQtMovimentoMercadoria());
 				me.setTpMovimentoEstoque("EN");
+				me.setIdMovimentoEstoque(movimentomercadoria.getIdmovimentoestoque());
 				mer.save(me);
 				mer.flush();
+				movimentomercadoria.setMovimentoestoque(me);
 				mmr.save(movimentomercadoria);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -74,6 +77,21 @@ public class MovimentoMercadoriaResources {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
 
+	@RequestMapping(value = "/deleteMovimentacao", method = RequestMethod.GET)
+	public ResponseEntity<MovimentoMercadoria> delMovimentacao(
+			@RequestParam(value = "idMovimentoMercadoria", required = true, name = "idMovimentoMercadoria") int idMovimentoMercadoria) {
+		try {
+			Optional<MovimentoMercadoria> movimentomercadoria = mmr.findById(idMovimentoMercadoria);
+			if (movimentomercadoria.isPresent()) {
+				mmr.delete(movimentomercadoria.get());
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }
