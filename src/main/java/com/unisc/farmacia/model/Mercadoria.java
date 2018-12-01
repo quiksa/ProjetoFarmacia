@@ -55,7 +55,7 @@ public class Mercadoria {
 	private String codBarra;
 
 	@Column(name = "vlmercadoria")
-	private float vlMercadoria;
+	private double vlMercadoria;
 	
 	@ManyToOne
 	@JoinColumn(name = "idcategoria")
@@ -131,11 +131,11 @@ public class Mercadoria {
 		this.codBarra = codBarra;
 	}
 
-	public float getVlMercadoria() {
+	public double getVlMercadoria() {
 		return vlMercadoria;
 	}
 
-	public void setVlMercadoria(float vlMercadoria) {
+	public void setVlMercadoria(double vlMercadoria) {
 		this.vlMercadoria = vlMercadoria;
 	}
 

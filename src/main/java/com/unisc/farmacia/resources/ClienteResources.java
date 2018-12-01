@@ -1,6 +1,7 @@
 package com.unisc.farmacia.resources;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -60,11 +61,18 @@ public class ClienteResources {
 
 	// POR ITEM UNICO
 
-	@GetMapping("/cliente/{id}")
+	@GetMapping("/cliente/id={id}")
 	public @ResponseBody Optional<Cliente> retornaClientePorId(@PathVariable Integer id) {
 		Optional<Cliente> cliente = cr.findById(id);
 		return cliente;
 	}
+	
+	@GetMapping("/cliente/nome={nome}")
+	public @ResponseBody List<Cliente>retornaListaClientePorNome(@PathVariable String nome){
+		List<Cliente> cliente = cr.findListaClientePorNome(nome);
+		return cliente;
+	}
+
 
 	@RequestMapping(value = "/deleteCliente", method = RequestMethod.GET)
 	public ResponseEntity<Cliente> delcliente(
@@ -132,4 +140,6 @@ public class ClienteResources {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	
 }
