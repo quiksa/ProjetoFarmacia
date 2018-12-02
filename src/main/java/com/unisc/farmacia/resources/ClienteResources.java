@@ -125,11 +125,9 @@ public class ClienteResources {
 					p.setDtnascimento(LocalDate.parse(cliente.getDtnascimento()));
 					pr.save(p);
 					pr.flush();
-					Cliente cli = new Cliente();
-					cli.setIdCliente(cliente.getIdCliente());
-					cli.setPessoa(p);
-					cr.save(cli);
-					return new ResponseEntity<Cliente>(cli, HttpStatus.OK);
+					cliente.setPessoa(p);
+					cr.save(cliente);
+					return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
 				} else {
 					return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 				}

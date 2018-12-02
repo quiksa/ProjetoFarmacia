@@ -66,6 +66,8 @@ public class MovimentoMercadoriaResources {
 				me.setQtMovimentoEstoque(movimentomercadoria.getQtMovimentoMercadoria());
 				me.setTpMovimentoEstoque("EN");
 				me.setIdMovimentoEstoque(movimentomercadoria.getIdmovimentoestoque());
+				mercadoria.get().setVlMercadoria(Float.parseFloat(movimentomercadoria.getVlMovimentoMercadoria()));
+				mr.save(mercadoria.get());
 				mer.save(me);
 				mer.flush();
 				movimentomercadoria.setMovimentoestoque(me);
