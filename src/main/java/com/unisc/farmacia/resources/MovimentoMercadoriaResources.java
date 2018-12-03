@@ -1,5 +1,6 @@
 package com.unisc.farmacia.resources;
 
+import java.awt.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unisc.farmacia.model.DocFiscal;
 import com.unisc.farmacia.model.Estoque;
 import com.unisc.farmacia.model.Fornecedor;
 import com.unisc.farmacia.model.Mercadoria;
@@ -76,6 +78,22 @@ public class MovimentoMercadoriaResources {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 			return new ResponseEntity<MovimentoMercadoria>(movimentomercadoria, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@Transactional
+	@RequestMapping(value = "/saveVenda", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<DocFiscal> retornaVenda(@RequestParam("listMercadorias") List listMercadorias,
+			@RequestParam("idCliente") String idCliente, @RequestParam("idUsuario") String idUsuario) {
+		try {
+			if (idCliente.equals("")) {
+
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<DocFiscal>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
