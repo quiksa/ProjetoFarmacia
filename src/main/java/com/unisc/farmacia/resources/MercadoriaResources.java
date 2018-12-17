@@ -51,7 +51,8 @@ public class MercadoriaResources {
 	public ResponseEntity<Mercadoria> retornaMercadoria(@RequestBody Mercadoria mercadoria) {
 		try {
 			if (mercadoria.getCodBarra() > 0 && !mercadoria.getNmMercadoria().equals("")
-					&& !mercadoria.getDsComplemento().equals("") && !mercadoria.getIdcategoria().equals("")) {
+					&& mercadoria.getVlMercadoria() > 0 && !mercadoria.getDsComplemento().equals("")
+					&& !mercadoria.getIdcategoria().equals("") && !mercadoria.getIdunidade().equals("")) {
 				Optional<Categoria> categoria = cr.findById(Integer.parseInt(mercadoria.getIdcategoria()));
 				mercadoria.setCategoria(categoria.get());
 				mr.save(mercadoria);
@@ -60,11 +61,8 @@ public class MercadoriaResources {
 			}
 			return new ResponseEntity<Mercadoria>(mercadoria, HttpStatus.OK);
 
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-
 	}
 }

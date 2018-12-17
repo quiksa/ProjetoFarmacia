@@ -13,7 +13,6 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-
 @Entity
 @Table(name = "fornecedor")
 public class Fornecedor {

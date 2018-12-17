@@ -49,6 +49,9 @@ public class Mercadoria {
 	@Transient
 	private String idcategoria;
 
+	@Transient
+	private String idunidade;
+
 	public List<HistoricoPreco> getHistoricoDePrecos() {
 		return historicoDePrecos;
 	}
@@ -107,6 +110,10 @@ public class Mercadoria {
 
 	public void setVlMercadoria(float vlMercadoria) {
 		this.vlMercadoria = vlMercadoria;
+	}
+
+	public String getIdunidade() {
+		return idunidade;
 	}
 
 }

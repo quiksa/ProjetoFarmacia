@@ -38,8 +38,8 @@ public class MovimentoMercadoria {
 	private Mercadoria mercadoria;
 
 	@ManyToOne
-	@JoinColumn(name = "idestoque")
-	private Estoque estoque;
+	@JoinColumn(name = "idunidade")
+	private Unidade unidade;
 
 	@OneToOne
 	@JoinColumn(name = "idmovimentoestoque")
@@ -50,13 +50,19 @@ public class MovimentoMercadoria {
 	private String idfornecedor;
 
 	@Transient
-	private String idestoque;
+	private String idunidade;
 
 	@Transient
 	private String idmercadoria;
 
 	@Transient
+	private String dtvalidade;
+
+	@Transient
 	private String dslote;
+
+	@Transient
+	private String idfuncionario;
 
 	@Transient
 	private int idmovimentoestoque;
@@ -93,12 +99,12 @@ public class MovimentoMercadoria {
 		this.mercadoria = mercadoria;
 	}
 
-	public Estoque getEstoque() {
-		return estoque;
+	public Unidade getUnidade() {
+		return unidade;
 	}
 
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
 	}
 
 	public MovimentoEstoque getMovimentoestoque() {
@@ -111,10 +117,6 @@ public class MovimentoMercadoria {
 
 	public String getIdfornecedor() {
 		return idfornecedor;
-	}
-
-	public String getIdestoque() {
-		return idestoque;
 	}
 
 	public String getIdmercadoria() {
@@ -139,6 +141,18 @@ public class MovimentoMercadoria {
 
 	public void setIdmovimentoestoque(int idmovimentoestoque) {
 		this.idmovimentoestoque = idmovimentoestoque;
+	}
+
+	public String getDtvalidade() {
+		return dtvalidade;
+	}
+
+	public String getIdunidade() {
+		return idunidade;
+	}
+
+	public String getIdfuncionario() {
+		return idfuncionario;
 	}
 
 }
